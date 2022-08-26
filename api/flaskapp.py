@@ -51,7 +51,7 @@ def make_new_submission(game_id: str) -> str:
     return submission_id
 
 
-@app.route('/api/games/game/<game_guid>/submission/<submission_guid>',
+@app.route('/api/games/<game_guid>/submission/<submission_guid>',
            methods=["GET"])
 def get_submission(game_guid, submission_guid):
     if (
@@ -64,7 +64,7 @@ def get_submission(game_guid, submission_guid):
     return jsonify(submissions[submission_guid])
 
 
-@app.route('/api/games/game/<game_guid>/submit', methods=["POST"])
+@app.route('/api/games/<game_guid>/submit', methods=["POST"])
 def submit_game(game_guid):
     if 'file' in request.files:
         file = request.files['file']
@@ -85,7 +85,7 @@ def submit_game(game_guid):
         return "bad request", 400
 
 
-@app.route('/api/games/game/<game_guid>', methods=["GET"])
+@app.route('/api/games/<game_guid>', methods=["GET"])
 def get_game(game_guid):
     if game_guid in games:
         return jsonify(games[game_guid])
