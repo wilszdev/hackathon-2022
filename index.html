@@ -36,7 +36,19 @@
 
             <div class="main">
                 <div class="scoreLine"><span id="nameScore">Your score is: </span><span id="score">0</span></div>
-                <div class="canvas"><canvas id="mainCanvas" height="" width=""></canvas></div>
+                <div class="canvas">
+                    <div class="startModal" id="startModal">
+                        <div class="startModalContent"></div>
+                    </div>
+                    <canvas id="mainCanvas" height="" width=""></canvas>
+                    <div class="dots">
+                        <span class="dot" id="dotRed" onclick=""></span>
+                        <span class="dot" id="dotYellow"></span>
+                        <span class="dot" id="dotBlue"></span>
+                        <span class="dot" id="dotBlack"></span>
+                        <span class="dot" id="dotWhite"></span>
+                    </div> 
+                </div>
             </div>
 
             <div class="mainFoot">
