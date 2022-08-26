@@ -15,14 +15,16 @@ document.addEventListener('mouseenter', setPosition);
 
 // new position from mouse event
 function setPosition(e) {
-  pos.x = e.offsetX-50;
-  pos.y = e.offsetY-20;
+  pos.x = e.offsetX;
+  pos.y = e.offsetY;
 }
 
 // resize canvas
 function resize() {
-  ctx.canvas.width = document.getElementById('mainCanvas').width;
-  ctx.canvas.height = document.getElementById('mainCanvas').height;
+  canvas.width = document.getElementById('mainCanvas').offsetWidth;
+  canvas.height = document.getElementById('mainCanvas').offsetHeight;
+  ctx.canvas.width = canvas.width;
+  ctx.canvas.height = canvas.height;
 }
 
 function draw(e) {
