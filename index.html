@@ -2,8 +2,36 @@
 <html lang="en">
     <head>
         <title>Skribbl.AI</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        
+        <div class="header">
+            <span id="title">SKRIBBL.</span><img id="aiImg" src="images/real-ai-1110x9999.jpg">
+                <!--https://emarsys.com/learn/blog/real-ai/-->
+        </div>
+        <div class="content">
+            <div class="mainHead">
+                <div class="time"><span>Time Remaining: </span><span id="timer">6</span></div>
+                <div class="mainTitle">
+                    <div class="round"><span>Round: </span><span id="roundNumber">8</span>
+                    </div>
+                    <div class="prompt" id="prompt">
+                        Prompt
+                    </div>
+                    <div class="round"></div>
+                </div>
+            </div>
+
+            <div class="main">
+                <div class="scoreLine"><span>Your score is: </span><span id="score">0</span></div>
+                <div class="canvas"><canvas id="mainCanvas"></canvas></div>
+            </div>
+
+            <div class="mainFoot">
+                <div class="footLeft"></div>
+                <div class="percent"><span>Your Score: </span><span id="score"></span></div>
+            </div>
+        </div>
+        <script src="script.js"></script>
     </body>
 </html>

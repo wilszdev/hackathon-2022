@@ -1,0 +1,65 @@
+*{
+    background-color: #058ED9;
+}
+body{
+    margin: 0;
+}
+.header{
+    background-color: aqua;
+    padding: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#title{
+    font-size: min(250%, 75px);
+    background-color: aqua;
+}
+#aiImg{
+    max-height: 75px;
+}
+.content{
+    margin: 3% 3% 5% 5%;
+    font-size: 120%;
+}
+.mainHead, .main, .mainFoot{
+    display: flex;
+}
+.time, .scoreLine, .footLeft{
+    flex: 2;
+    max-width: 200px;
+    display: flex;
+    justify-content: space-around;
+}
+.time{
+    align-items: center;
+}
+.mainTitle, .canvas, .percent{
+    flex: 5;
+    margin: 0% 5%;
+}
+.mainTitle{
+    align-items: center;
+    display: flex;
+}
+.round{
+    left: min(10px, 10%);
+    top: 5%;
+    flex: 1;
+    flex-grow: 1;
+}
+.prompt{
+    text-align: center;
+    font-size: xx-large;
+    flex: 3;
+}
+.main{
+    margin-top: 15px;
+}
+#timer{
+    text-decoration: underline;
+}
+#mainCanvas{
+    width: 100%;
+}
