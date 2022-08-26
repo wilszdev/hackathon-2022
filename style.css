@@ -53,20 +53,25 @@ body{
     flex: 3;
 }
 .main{
-    margin-top: 15px;
+    margin: 15px 0px;
 }
 #timer{
     text-decoration: underline;
 }
 #mainCanvas{
-    width: 100%;
-    height: 50%;
+    width: 80%;
+    height: 40vh;
+    padding: 0;
+    margin: auto;
+    display: block;
+    border: 3px solid #000;
 }
 .percent{
     display: flex;
     justify-content: space-around;
 }
 .nameCollector{
+    display: none;/*DELETE THIS LINE HERE*/
     position: absolute;
     width: 100%;
     height: 100%;
