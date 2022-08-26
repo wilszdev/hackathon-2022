@@ -8,6 +8,11 @@ resize();
 // last known position
 let pos = { x: 0, y: 0 };
 
+//current colour of the line
+let col = '#c0392b';
+//current width of the line
+let lineWid = 1;
+
 window.addEventListener('resize', resize);
 document.addEventListener('mousemove', draw);
 document.addEventListener('mousedown', setPosition);
@@ -33,9 +38,9 @@ function draw(e) {
 
   ctx.beginPath(); // begin
 
-  ctx.lineWidth = 1;
+  ctx.lineWidth = lineWid;
   ctx.lineCap = 'round';
-  ctx.strokeStyle = '#c0392b';
+  ctx.strokeStyle = col;
   
   ctx.moveTo(pos.x, pos.y); // from
   setPosition(e);
@@ -53,3 +58,30 @@ document.getElementById('nameButton').addEventListener("click",function(){
   document.getElementById("nameScore").innerHTML = document.getElementById('nameInput').value+": ";
   hideNameModal();
 });
+
+document.getElementById('startModal').addEventListener("click",function(){
+  const timeLimit = 2;
+  let timeLeft = timeLimit;
+
+  document.getElementById('startModal').style.display = "none";
+
+  document.getElementById('timer').innerHTML = timeLeft;
+
+  let intervalTimer = setInterval(function f(){
+    timeLeft--;
+    document.getElementById('timer').innerHTML = timeLeft;
+    
+    if(timeLeft <= 0){
+      clearInterval(intervalTimer);
+    }
+    console.log(timeLeft);
+  },1000);
+  
+  //document.getElementById('startModal').style.display = "block";
+});
+
+function setTimer(time){
+  document.getElementById('timer').innerHTML = time;
+  console.log();
+}
+function w(){}
