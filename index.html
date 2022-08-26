@@ -5,6 +5,18 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <div class="nameCollector">
+            <div class="nameBox">
+                <div class="nameModalContent">
+                    <span>Please Enter Your Name</span>
+                    <input id="nameInput"></input>
+                    <div>
+                        <button id="nameButton">Submit</button>
+                        <button id="guestButton" onclick="hideNameModal();">Guest</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="header">
             <span id="title">SKRIBBL.</span><img id="aiImg" src="images/real-ai-1110x9999.jpg">
                 <!--https://emarsys.com/learn/blog/real-ai/-->
@@ -23,8 +35,8 @@
             </div>
 
             <div class="main">
-                <div class="scoreLine"><span>Your score is: </span><span id="score">0</span></div>
-                <div class="canvas"><canvas id="mainCanvas"></canvas></div>
+                <div class="scoreLine"><span id="nameScore">Your score is: </span><span id="score">0</span></div>
+                <div class="canvas"><canvas id="mainCanvas" height="" width=""></canvas></div>
             </div>
 
             <div class="mainFoot">

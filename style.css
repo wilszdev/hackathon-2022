@@ -1,8 +1,6 @@
-*{
-    background-color: #058ED9;
-}
 body{
     margin: 0;
+    background-color: #058ED9;
 }
 .header{
     background-color: aqua;
@@ -62,4 +60,57 @@ body{
 }
 #mainCanvas{
     width: 100%;
+    height: 50%;
+}
+.percent{
+    display: flex;
+    justify-content: space-around;
+}
+.nameCollector{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 1;
+}
+.nameBox{
+    width: 50vw;
+    height: 50vh;
+    max-width: 400px;
+    min-width: 300px;
+    background-color: #FF6700;
+    border-radius: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+.nameModalContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10%;
+    height: 80%;
+    justify-content: space-between;
+}
+.nameModalContent span{
+    text-align: center;
+    margin: 5vh;
+}
+.nameModalContent input{
+    text-align: center;
+    margin-top: 10vh;
+    width: 60%;
+}
+.nameModalContent div{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.nameModalContent div button{
+    text-align: center;
+    height: 20px;
+    width: 30%;
 }

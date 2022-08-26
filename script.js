@@ -1,20 +1,12 @@
-var h = document.body.offsetHeight;
-console.log(document.body.offsetHeight);
-
 // create canvas element and append it to document body
-var canvas = document.createElement('canvas');
-document.body.appendChild(canvas);
-
-// some hotfixes... ( ≖_≖)
-document.body.style.margin = 0;
-canvas.style.position = 'fixed';
+let canvas = document.getElementById('mainCanvas');
 
 // get canvas 2D context and set him correct size
-var ctx = canvas.getContext('2d');
+let ctx = canvas.getContext('2d');
 resize();
 
 // last known position
-var pos = { x: 0, y: 0 };
+let pos = { x: 0, y: 0 };
 
 window.addEventListener('resize', resize);
 document.addEventListener('mousemove', draw);
@@ -23,14 +15,14 @@ document.addEventListener('mouseenter', setPosition);
 
 // new position from mouse event
 function setPosition(e) {
-  pos.x = e.clientX;
-  pos.y = e.clientY-h;
+  pos.x = e.offsetX-50;
+  pos.y = e.offsetY-20;
 }
 
 // resize canvas
 function resize() {
-  ctx.canvas.width = window.innerWidth;
-  ctx.canvas.height = window.innerHeight;
+  ctx.canvas.width = document.getElementById('mainCanvas').width;
+  ctx.canvas.height = document.getElementById('mainCanvas').height;
 }
 
 function draw(e) {
@@ -39,13 +31,23 @@ function draw(e) {
 
   ctx.beginPath(); // begin
 
-  ctx.lineWidth = 5;
+  ctx.lineWidth = 1;
   ctx.lineCap = 'round';
   ctx.strokeStyle = '#c0392b';
-
+  
   ctx.moveTo(pos.x, pos.y); // from
   setPosition(e);
   ctx.lineTo(pos.x, pos.y); // to
 
   ctx.stroke(); // draw it!
 }
+
+function hideNameModal(){
+  document.getElementsByClassName("nameCollector")[0].style.display = "none";
+  document.getElementsByClassName("nameCollector")[0].style.opacity = 0;
+}
+
+document.getElementById('nameButton').addEventListener("click",function(){
+  document.getElementById("nameScore").innerHTML = document.getElementById('nameInput').value+": ";
+  hideNameModal();
+});
