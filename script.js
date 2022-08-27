@@ -1,11 +1,13 @@
 $(document).ready(function() {
   $('#canvasDiv').hide();
-  $('#endModal').hide();
+  $('#endModal').show();
+  $('#startModal').hide();
+  
   resize();
   pencil();
 });
 
-const timeLimit = 300;
+const timeLimit = 1;
 
 // get canvas 2D context and set him correct size
 let canvas = document.getElementById('canvasView');
@@ -13,6 +15,7 @@ let ctx = canvas.getContext('2d');
 resize();
 
 let round = 1;
+let roundPoints = 0;
 let totalScore = 0
 
 $('#round').text("ROUND "+round);
