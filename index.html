@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand:wght@400;700&family=Swanky+and+Moo+Moo&family=Patrick+Hand&display=swap" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <body>
@@ -29,7 +29,7 @@
         <div class="content">
             <div class="top">
                 <div class="rnd">
-                    <span id="round">Round 1</span>
+                    <span id="round"></span>
                 </div>
             </div>
             <div class="main">
@@ -47,14 +47,14 @@
                     </div>
                 </div>
                 <div class="mainCenter">
-                    <div class="startModal">
+                    <div class="startModal" id="start">
                         <div class="startModalContent">
-                            <input type="button">
+                            <input type="button" class="modalButton" onclick="startRound()" value="Start Round">
                         </div>
                     </div>
                     <div class="endModal">
-                        <div class="startModalContent">
-                            
+                        <div class="endModalContent" id="end">
+                            <input type="button" class="modalButton" onclick="nextRound()" value="Next Round">
                         </div>
                     </div>
                     <div class="canvasDiv">
@@ -67,7 +67,7 @@
                         <span id="drawObject"></span>
                     </div>
                     <div class="total">
-                        <span>total</span>
+                        <span>total</span></br>
                         <span>100%</span>
                     </div>
                 </div>

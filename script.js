@@ -3,6 +3,11 @@ let canvas = $('#canvasview')[0];
 let ctx = canvas.getContext('2d');
 resize();
 
+let round = 1;
+let totalScore = 0
+
+$('#round').text("ROUND "+round);
+
 // last known position
 let pos = { x: 0, y: 0 };
 
@@ -21,8 +26,8 @@ function setPosition(e) {
 
 // resize canvas
 function resize() {
-  $("#canvasview")[0].width = $("#canvasview")[0].offsetWidth;
-  $("#canvasview")[0].height = $("#canvasview")[0].offsetHeight;
+  $("#canvasview")[0].width = $("#canvasview")[0].clientWidth;
+  $("#canvasview")[0].height = $("#canvasview")[0].clientHeight;
   ctx.width = $("#canvasview")[0].width;
   ctx.height = $("#canvasview")[0].height;
 }
@@ -37,6 +42,9 @@ let erase = false;
 $(document).click(function(){
   if(!erase)
     col = $("#colorpicker")[0].value;
+  else{
+    col = "rgb(225, 234, 239)";
+    }
 });
 
 $('#pencil')[0].click(function(){col = $("#colorpicker")[0].value;});
@@ -77,12 +85,13 @@ function clearCanvas(){
 
 let listOfPrompts = ["Amongus", "Minion", "Apple", "Piano", "Amongus", "Minion", "Apple"]
 
-$("#canvasModal")[0].click(function(){
+function startRound(){
 
   //generate prompt
   if(listOfPrompts.length > 1){
     let randInt = Math.floor(Math.random() * 10);
     let currentPrompt = listOfPrompts[randInt];
+    $('#drawObject').html() = currentPrompt;
     listOfPrompts.splice(randInt, randInt+1);
   }
   else
@@ -90,41 +99,42 @@ $("#canvasModal")[0].click(function(){
 
   clearCanvas();
 
+  $("#startModal").style.display = "none";
+
   const timeLimit = 10;
   let timeLeft = timeLimit;
 
-  $("#startModal").style.display = "none";
-
-  $("#timeRemaining").innerHTML = timeLeft + " seconds left";
+  $("#timeRemaining").html() = timeLeft + " seconds left";
 
   let intervalTimer = setInterval(function f(){
     timeLeft--;
 
     switch(timeLeft){
       case 1:
-        $("#timeRemaining").innerHTML = timeLeft + " second left";
+        $("#timeRemaining").html() = timeLeft + " second left";
         break;
       case -1:
         clearInterval(intervalTimer);
         break;
       default:
-        $("#timeRemaining").innerHTML = timeLeft + " seconds left";
+        $("#timeRemaining").html() = timeLeft + " seconds left";
         break;
     }
-    
-    $("#timeRemaining").innerHTML = timeLeft;
     console.log(timeLeft);
   },1000);
   
-  document.getElementById('startModal').style.display = "initial";
-});
+  endTime();
 
-function setTimer(time){
-  $("#timer").innerHTML = time;
-  console.log();
+};
+
+function endTime(){
+  $("#startModal").css("display","block");
+  //send image
+  //edit modal
+  //add points
+  //change points on screen;
 }
-function w(){};
-
+//$("#startModal").css("display","initial");
 
 function submit_image() {
   api_get_prompt((response) => {
@@ -141,8 +151,16 @@ function pencil(){
   erase = false;
   col = $("#colorpicker")[0].value;
 }
+
 function eraser(){
   erase = true;
-  col = "#e2ebf0"; 
-  console.log(col);
+  col = "#e2ebf0";
 }
+
+function nextRound(){
+  round++;
+  //edit round number
+  $('#round').text("ROUND "+round);
+  totalScore = totalScore + score;
+  $('#start').css("display","block");
+} 
