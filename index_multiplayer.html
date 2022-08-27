@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <link rel="icon" href="https://cdn.discordapp.com/attachments/530338235159937046/1013088909636415588/unknown.png">
-        <title>Skribbl.AI</title>
+        <title>Skribbl.AI Multiplayer</title>
         <script src="https://kit.fontawesome.com/5461e2bcc8.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css/style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,7 @@
             <div id="multiDiv">
                 <div class="mainRight">
                     <div class="tool">
-                        <a href="index_multiplayer.html">Multiplayer <em class="fa fa-duotone fa-user-group fa-lg"></em></a>
+                        <a href="index.html">Singleplayer <em class="fa fa-solid fa-user fa-lg"></em></a>
                     </div>
                 </div>
             </div>
@@ -82,22 +82,29 @@
                             <input type="button" id="endModalButton" class="modalButton" onclick="nextRound()" value="Next Round">
                         </div>
                     </div>
+                    <div class="timer">
+                        <span id="timeRemaining"></span>
+                    </div>
                 </div>
                 <div class="mainRight">
                     <div class="drawA">
                         <span>Draw a:</span></br>
                         <span id="drawObject"></span>
                     </div>
-                    <div class="total">
-                        <span>Total</span></br>
-                        <span id="totalPoints">0</span>
+                    <div class="mainRightBottom">
+                        <div class="total">
+                            <p id="name1">Name</p>
+                            <p id="totalPoints1">0</p>
+                        </div>
+                        <div class="total">
+                            <p>Name</p>
+                            <p id="totalPoints2">0</p>
+                        </div> 
                     </div>
                 </div>
             </div>
             <div class="bottom">
-                <div class="timer">
-                    <span id="timeRemaining"></span>
-                </div>
+                
             </div>
         </div>
         <script src="api.js"></script>
