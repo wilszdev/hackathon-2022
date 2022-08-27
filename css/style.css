@@ -8,6 +8,7 @@ body{
     margin: 0;
     background-color: var(--main-color);
     color: var(--white);
+    user-select: none;
 }
 .header{
     padding: 30px;
