@@ -1,21 +1,21 @@
+:root {
+    --main-color: rgb(46, 100, 128);
+    --darker-color: rgb(20,29,66);
+    --white: rgb(226,235,240);
+  }
+
 body{
     margin: 0;
-    background-color: #058ED9;
+    background-color: var(--main-color);
+    color: var(--white);
 }
 .header{
-    background-color: aqua;
-    padding: 50px;
-
+    padding: 30px;
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 #title{
-    font-size: min(250%, 75px);
-    background-color: aqua;
-}
-#aiImg{
-    max-height: 75px;
+    font-size: min(300%, 80px);
+    font-family: 'Fuzzy Bubbles';
 }
 .content{
     margin: 3% 3% 5% 5%;
@@ -65,7 +65,7 @@ body{
     padding: 0;
     margin: auto;
     display: block;
-    border: 3px solid #000;
+    background-color:var(--white);
 }
 .percent{
     display: flex;
@@ -102,9 +102,15 @@ body{
     z-index: 1;
     position: absolute;
     display: block;
-    width: 60%;
+    width: 50vw;
     height: 100%;
-    background-color: white;
+    background-color: var(--white);
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 5px solid black;
 }
 .nameCollector{
     display: none;/*DELETE THIS LINE HERE*/
