@@ -1,102 +1,63 @@
+from random import choice
+from click import prompt
 from flask import Flask, abort, jsonify, request
 from time import time_ns
 from uuid import uuid4
 import os
+from flask_cors import CORS
+
+
+app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+prompts = {}
+
+
+prompt_options = ('duck', 'apple', 'amongus', 'minions', 'piano')
+
+
+def get_prompt() -> str:
+    return choice(prompt_options)
 
 
 def guid() -> str:
     return uuid4().hex
 
 
-app = Flask(__name__)
+@app.route('/api/prompts/new', methods=["POST"])
+def create_round_get_prompt():
+    prompt = {'id': guid(), 'prompt': get_prompt(), 'ts': time_ns()}
+
+    global prompts
+    prompts.update({prompt['id']: prompt})
+
+    return jsonify(prompt), 200
 
 
-games = {}
-submissions = {}
+@app.route('/api/prompts/<prompt_id>/submit', methods=["POST"])
+def make_submission_for_prompt(prompt_id):
+    if request.content_type != 'image/png':
+        abort(400)
 
-
-def get_prompt() -> str:
-    return 'duck'
-
-
-def make_new_game() -> str:
-    global games
-    game_id = guid()
-    game = {
-        'id': game_id,
-        'current_prompt': get_prompt(),
-        'start_time': time_ns(),
-        'submission': None
-    }
-    games.update({game_id: game})
-    return game_id
-
-
-def make_new_submission(game_id: str) -> str:
-    global games
-    global submissions
-
-    if game_id not in games:
+    if prompt_id not in prompts:
         abort(404)
 
-    submission_id = guid()
-    submission = {
-        'id': submission_id,
-        'ts': time_ns(),
+    dst_folder = 'submissions'
+    if not os.path.exists(dst_folder):
+        os.mkdir(dst_folder)
+
+    data = request.get_data()
+
+    with open(os.path.join(dst_folder, f"{prompt_id}.png"), 'bw+') as f:
+        f.write(data)
+
+    response = {
+        'prompt_id': prompt_id,
+        'score': 69
     }
 
-    games[game_id]['submission'] = submission_id
-
-    submissions.update({submission_id: submission})
-    return submission_id
-
-
-@app.route('/api/games/<game_guid>/submission/<submission_guid>',
-           methods=["GET"])
-def get_submission(game_guid, submission_guid):
-    if (
-        game_guid not in games
-        or submission_guid != games[game_guid]['submission']
-        or submission_guid not in submissions
-    ):
-        abort(404)
-
-    return jsonify(submissions[submission_guid])
-
-
-@app.route('/api/games/<game_guid>/submit', methods=["POST"])
-def submit_game(game_guid):
-    if 'file' in request.files:
-        file = request.files['file']
-
-        dst_folder = 'submissions'
-        if not os.path.exists(dst_folder):
-            os.mkdir(dst_folder)
-
-        _, ext = os.path.splitext(file.filename)
-
-        submission_id = make_new_submission(game_guid)
-        filename = f'{submission_id}{ext}'
-
-        file.save(os.path.join(dst_folder, filename))
-
-        return jsonify(submissions[submission_id])
-    else:
-        return "bad request", 400
-
-
-@app.route('/api/games/<game_guid>', methods=["GET"])
-def get_game(game_guid):
-    if game_guid in games:
-        return jsonify(games[game_guid])
-    else:
-        abort(404)
-
-
-@app.route('/api/games/new', methods=["POST"])
-def new_game():
-    game_id = make_new_game()
-    return jsonify(games[game_id])
+    return jsonify(response), 200
 
 
 if __name__ == '__main__':
