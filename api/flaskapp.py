@@ -31,7 +31,7 @@ prompt_options = (
         'description': 'apple'
     },
     {
-        'prompt': 'amongus',
+        'prompt': 'among_us',
         'description': 'among us'
     },
     {
