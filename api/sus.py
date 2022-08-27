@@ -4,7 +4,7 @@ from google.cloud import aiplatform
 from google.cloud.aiplatform.gapic.schema import predict
 
 
-credential_path = os.path.abspath(".\\api\\keyfile.json")
+credential_path = os.path.abspath("keyfile.json")
 print(f"{credential_path = }")
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
