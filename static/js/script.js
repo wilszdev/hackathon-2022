@@ -141,6 +141,7 @@ function endTime(){
   $('#numberCurrentPoints').text("");
   $('#endModalButton').hide();
   submit_image((score, top_categories) => {    
+    totalScore += score
     let thought = "The AI had no clue what on earth you drew..."
     let congrats = "Do better!"
 
@@ -158,7 +159,7 @@ function endTime(){
         congrats = "Nice Work!";
       } else {
         congrats = "Get good.";
-
+        
         if (top_categories.length == 1) {
           thought = `Oops! The AI thought your drawing was ${cat_art[0]}.`;
         } else {
