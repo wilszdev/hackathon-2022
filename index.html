@@ -35,9 +35,18 @@
             <div class="main">
                 <div class="mainLeft">
                     <div class="tools">
-                        <div class="tool" id="pencil" onclick="pencil()"><em class="fa fa-solid fa-pencil fa-lg"></em></div>
-                        <div class="tool" id="eraser" onclick="eraser()"><em class="fa fa-solid fa-eraser fa-lg"></em></div>
+                        <div class="tool" id="pencil" onclick="pencil()"><em class="fa fa-solid fa-pencil fa-lg" id="pen"></em></div>
+                        <div class="tool" id="eraser" onclick="eraser()"><em class="fa fa-solid fa-eraser fa-lg" id="per"></em></div>
                         <div class="tool" id="reset" onclick="clearCanvas()"><em class="fa fa-solid fa-rotate-right fa-lg"></em></div>
+                        <div class="tool" id="penSize">
+                            <label for="penSize">Pen Size:</label>
+                            <select name="pensize" id="sizes" onchange="penSizeChange()">
+                                <option value="3">1</option>
+                                <option value="6">2</option>
+                                <option value="9">3</option>
+                                <option value="15">4</option>
+                            </select>
+                        </div>
                         <div class="tool" id="colourPickerDiv">
                             <div style="text-align: center;">
                                 <label for="colorpicker">Color Picker:</label></br>
@@ -47,23 +56,23 @@
                     </div>
                 </div>
                 <div class="mainCenter">
-                    <div class="startModal" id="start">
+                    <div class="startModal" id="startModal">
                         <div class="startModalContent">
                             <input type="button" class="modalButton" onclick="startRound()" value="Start Round">
                         </div>
                     </div>
-                    <div class="endModal">
-                        <div class="endModalContent" id="end">
+                    <div class="canvasDiv" id="canvasDiv">
+                        <canvas id="canvasview"></canvas>
+                    </div>
+                    <div class="endModal" id="endModal">
+                        <div class="endModalContent">
                             <input type="button" class="modalButton" onclick="nextRound()" value="Next Round">
                         </div>
-                    </div>
-                    <div class="canvasDiv">
-                        <canvas id="canvasview"></canvas>
                     </div>
                 </div>
                 <div class="mainRight">
                     <div class="drawA">
-                        <span>draw a:</span>
+                        <span>draw a:</span></br>
                         <span id="drawObject"></span>
                     </div>
                     <div class="total">

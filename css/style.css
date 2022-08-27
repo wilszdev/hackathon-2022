@@ -20,7 +20,7 @@ body{
 #title{
     font-size: min(300%, 80px);
     font-family: 'Gochi Hand';
-    text-shadow: 1px 1px 2px black;
+    text-shadow: 1px 1px 4px black;
 }
 /*content*/
 .content{
@@ -48,14 +48,6 @@ body{
     flex: 1;
     flex-grow: 1;
 }
-.mainCenter{
-    flex: 3;
-    display: flex;
-    flex-flow: wrap;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-}
 
 
 
@@ -75,9 +67,19 @@ body{
     text-align: end;
     margin: 30px 0;
 }
+select{
+    background-color: var(--light-color);
+    border: none;
+}
+
+/*center*/
+.mainCenter{
+    flex: 3;
+    display: flex;
+}
 
 /*canvas*/
-.canvasDiv{
+.canvasDiv, .startModal, .endModal{
     flex: 1 100%;
     height: 100%;
     margin: 10px;
@@ -90,23 +92,19 @@ canvas{
 
 /*modal*/
 .startModal, .endModal{
-    background-color: var(--white);
-    z-index: 2;
-    flex: 1 100%;
-    border: 1px solid black;
-}
-.startModal{
-    display: none;
-}
-.startModal, .endModal, .canvasDiv{
-    /*display: none;*/
-    height: 100%;
-}
-.canvasDiv{
-    display: initial;
+    background-color: var(--light-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .modalButton{
     background-color: var(--light-color);
+    padding: 10px;
+    border: 3px solid var(--white);
+    border-radius: 10px;
+    font-size: large;
+    color: var(--white)
+    text-shadow: 1px 1px 4px black;
 }
 
 /*right*/
@@ -119,6 +117,18 @@ canvas{
 
 
 
+
+
+.timer{
+    display: flex;
+    justify-content: center;
+}
+em{
+   padding: 4px; 
+}
+#drawObject{
+    font-size: calc(var(--font-size)*1.25);
+}
 
 
 /*name modal collector*/
