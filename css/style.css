@@ -157,29 +157,43 @@ em{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10%;
+    margin: 15% 10% 10% 10%;
     height: 80%;
     justify-content: space-around;
+    color: white;
+}
+.nameModalName{
+    margin: 10px;
 }
 .nameModalBottom{
     display: flex;
     flex-direction: column;
-}
-.nameModalContent span{
-    text-align: center;
-    margin: 5vh;
+    align-items: center;
+    width: 100%;
 }
 .nameModalBottom input{
     text-align: center;
-    width: 60%;
+    border: none;
+    border-radius: 2px;
+    width: 75%;
+    margin: 10px;
+}
+.nameModalSpan{
+    text-align: center;
+    margin: 5vh;
 }
 .nameModalBottom div{
     display: flex;
     width: 100%;
     justify-content: space-around;
+    margin: 10px;
 }
 .nameModalBottom div button{
     text-align: center;
     height: 20px;
-    width: 50%;
+    width: 25%;
+    background-color: #375663;
+    color: var(--white);
+    border: none;
+    border-radius: 2px;
 }
