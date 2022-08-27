@@ -153,7 +153,6 @@ function nextRound(){
   hideEnd();
   showStart();
 }
-//$("#startModal").css("display","initial");
 
 function submit_image() {
   api_get_prompt((response) => {
@@ -166,18 +165,18 @@ function submit_image() {
   });
 }
 
-function pencil(){
-  erase = false;
-  col = $("#colorpicker")[0].value;
-  $('#per').css("border", "0px dashed", "#e2ebf0");
-  $('#pen').css("border", "2px dashed", "#e2ebf0");
-}
-
 function eraser(){
   erase = true;
   col = "#e2ebf0";
   $('#pen').css("border", "0px dashed white");
   $('#per').css("border", "2px dashed white");
+}
+
+function pencil(){
+  erase = false;
+  col = $("#colorpicker")[0].value;
+  $('#per').css("border", "0px dashed", "#e2ebf0");
+  $('#pen').css("border", "2px dashed", "#e2ebf0");
 }
 
 function penSizeChange(){
