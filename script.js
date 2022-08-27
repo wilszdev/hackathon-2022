@@ -9,7 +9,7 @@ $(document).ready(function() {
   pencil();
 });
 
-const timeLimit = 1;
+const timeLimit = 30;
 
 // get canvas 2D context and set him correct size
 let canvas = document.getElementById('canvasView');
@@ -139,36 +139,39 @@ function endTime(){
   hideCanvas();
   showEnd();
   //send image
+  $('#aiThought').text("");
+  $('#congrats').text("");
+  $('#numberCurrentPoints').text("");
+  $('#endModalButton').hide();
   submit_image((score, top_categories) => {
     // score is an integer in range [0, 100]
     // top_categories is an array of strings
+    let categories = top_categories;
     console.log('your score was ' + score + ' of 100')
-    console.log(top_categories)
-  });
-  if(currentPrompt == top_categories[0]){
-    if(top_categories[0][0] == 'a','e','i','o','u')
-    switch(top_categories[0][0]){
-      case 'a','e','i','o','u':
-        $('#aiThought').text("The AI thought your drawing was an " + top_categories[0]);
-        break;
-      default:
-        $('#aiThought').text("The AI thought your drawing was a " + top_categories[0]);
-        break;
-    }
-    
-    $('#congrats').text("Nice Work!");
-    $('#numberCurrentPoints').text(score + " points");
-  }
-  else {
-    $('#aiThought').text("Oops! The AI thought your drawing was a(n) "+top_categories[0]+". Or maybe a "+top_categories[1]+"???");
-    $('#congrats').text("Get good.");
-    $('#numberCurrentPoints').text(score + " points");
-  }
-  totalScore+=score;
-  $('#totalPoints').text(totalPoints);
+    console.log(categories);
 
-  //add points
-  //change points on screen;
+    if(currentPrompt == categories[0]){
+      if(categories[0][0] == 'a')
+        $('#aiThought').text("The AI thought your drawing was an " + categories[0]);
+      else
+        $('#aiThought').text("The AI thought your drawing was a " + categories[0]);
+      
+      $('#congrats').text("Nice Work!");
+      $('#numberCurrentPoints').text(score + " points");
+    }
+    else {
+      if(categories[0][0] == 'a')
+        $('#aiThought').text("Oops! The AI thought your drawing was an "+categories[0]+". Or maybe a "+categories[1]+"???");
+      else
+        $('#aiThought').text("Oops! The AI thought your drawing was a "+categories[0]+". Or maybe a "+categories[1]+"???");
+
+      $('#congrats').text("Get good.");
+      $('#numberCurrentPoints').text(score + " points");
+    }
+    totalScore+=score;
+    $('#totalPoints').text(totalScore);
+    $('#endModalButton').show();
+  });
 }
 
 function nextRound(){
