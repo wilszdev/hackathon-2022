@@ -24,7 +24,7 @@ $('#round').text("ROUND "+round);
 // last known position
 let pos = { x: 0, y: 0 };
 
-canvas.addEventListener('resize', resize);
+window.addEventListener('resize', resize);
 document.addEventListener('mousemove', draw);
 document.addEventListener('mousedown', setPosition);
 document.addEventListener('touchstart', setPosition);
@@ -66,7 +66,6 @@ $('#pencil')[0].click(function(){col = $("#colorpicker")[0].value;});
 $('#eraser')[0].click(function(){col = "#e2ebf0";});
 
 function draw(e) {
-  console.log("draw "+col);
   // mouse left button must be pressed
   if (e.buttons !== 1) return;
   // pos.x 
@@ -201,8 +200,8 @@ function eraser(){
 function pencil(){
   erase = false;
   col = $("#colorpicker")[0].value;
-  $('#per').css("border", "0px dashed", "#e2ebf0");
-  $('#pen').css("border", "2px dashed", "#e2ebf0");
+  $('#per').css("border", "0px dashed white");
+  $('#pen').css("border", "2px dashed white");
 }
 
 function penSizeChange(){
