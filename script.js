@@ -1,5 +1,6 @@
 // get canvas 2D context and set him correct size
-let ctx = document.getElementById('canvasview').getContext('2d');
+let canvas = document.getElementById('canvasview')
+let ctx = canvas.getContext('2d');
 resize();
 
 // last known position
@@ -88,3 +89,14 @@ function setTimer(time){
   console.log();
 }
 function w(){};
+
+function submit_image() {
+  api_get_prompt((response) => {
+    let id = response.id
+    canvas.toBlob((blob) => {
+      api_submit_prompt(id, blob, (response) => {
+        alert('your score was ' + response.score + ' of 100')
+      });
+    }, "image/png");
+  });
+}
