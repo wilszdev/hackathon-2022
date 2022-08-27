@@ -1,3 +1,5 @@
 submissions/
 venv/
 **/__pycache__/**
+api/config.json
+api/keyfile.json

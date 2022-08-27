@@ -1,3 +1,6 @@
+let currentPrompt;
+let currentPromptId;
+
 $(document).ready(function() {
   $('#canvasDiv').hide();
   $('#endModal').show();
@@ -97,41 +100,34 @@ function clearCanvas(){
   ctx.clearRect(0, 0, $('#canvasView')[0].width, $('#canvasView')[0].height);
 }
 
-let listOfPrompts = ["Amongus", "Minion", "Apple", "Piano", "Amongus", "Minion", "Apple"]
-
-function startRound(){
-
+function startRound() {
   hideStart();
   showCanvas();
   resize();
-  //generate prompt
-  if(listOfPrompts.length > 1){
-    let randInt = Math.floor(Math.random() * 10);
-    let currentPrompt = listOfPrompts[randInt];
+
+  api_get_prompt((p)=>{
+    currentPrompt = p.description
+    currentPromptId = p.id
     $('#drawObject').text(currentPrompt);
-    listOfPrompts.splice(randInt, randInt+1);
-  }
-  else
-    return;
+  });
 
   clearCanvas();
 
+  const timeLimit = 30;
   let currentTime = timeLimit;
 
   $("#timeRemaining").text(timeLimit + " seconds left");
 
-  let timerInterval = setInterval(
-    function f(){
-      setTimer(currentTime);
-      console.log("currentTime "+currentTime);
-      currentTime--;
-      if(currentTime < 0){
-        clearInterval(timerInterval);
-        endTime();
-      }
+  let timerInterval = setInterval(() => {
+    setTimer(currentTime);
+    console.log("currentTime "+currentTime);
+    currentTime--;
+    if(currentTime < 0){
+      clearInterval(timerInterval);
+      endTime();
     }
-  ,1000);
-}
+  }, 1000);
+} 
 
 function setTimer(i){
   if(i == 1){
@@ -146,6 +142,9 @@ function endTime(){
   hideCanvas();
   showEnd();
   //send image
+  submit_image((score) => {
+    alert('your score was ' + score + ' of 100')
+  });
   //edit modal
   //add points
   //change points on screen;
@@ -160,15 +159,12 @@ function nextRound(){
   showStart();
 }
 
-function submit_image() {
-  api_get_prompt((response) => {
-    let id = response.id
-    canvas.toBlob((blob) => {
-      api_submit_prompt(id, blob, (response) => {
-        alert('your score was ' + response.score + ' of 100')
-      });
-    }, "image/png");
-  });
+function submit_image(callback) {
+  canvas.toBlob((blob) => {
+    api_submit_prompt(currentPromptId, blob, (response) => {
+      callback(response.score)
+    });
+  }, "image/png");
 }
 
 function eraser(){

@@ -1,4 +1,0 @@
-create new game     (HTTP POST)     /api/games/new
-get game            (HTTP GET)      /api/games/game/{id}
-create submission   (HTTP POST)     /api/games/game/{id}/submit
-get submission      (HTTP GET)      /api/games/game/{game_id}/submission/{submission_id}
