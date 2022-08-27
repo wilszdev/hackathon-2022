@@ -11,7 +11,6 @@ Made with:
 * Placeholder
 
 # How does it work?
---placeholder-- can be updated later xd
 You will be prompted to draw a word that has been analysed by our AI. Skribbl.AI will then save your drawing on the canvas, to be analysed by our custom model trained via Vertex AI, which will then output a score rating how accurate your drawing is to the prompt.
 
 The score is calculated by --placeholder to be changed -- our function that we decided on based on the average outcomes of the AI.
