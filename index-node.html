@@ -13,19 +13,18 @@
         <div class="nameCollector">
             <div class="nameBox">
                 <div class="nameModalContent">
-                    <span class="nameModalName">Please Enter Your Name</span>
-                    <div class="nameModalBottom">
-                        <input id="nameInput"></input>
-                        <div>
-                            <button id="nameButton">Submit</button>
-                            <button id="guestButton" onclick="hideNameModal();">Guest</button>
-                        </div>
+                    <span>Please Enter Your Name</span>
+                    <input id="nameInput"></input>
+                    <div>
+                        <button id="nameButton">Submit</button>
+                        <button id="guestButton" onclick="hideNameModal();">Guest</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="header">
             <span id="title">SKRIBBL.AI</span>
+            <button id="submitButton" onclick="submit_image();">submit</button>
         </div>
         <div class="content">
             <div class="top">
@@ -63,19 +62,17 @@
                         </div>
                     </div>
                     <div class="canvasDiv" id="canvasDiv">
-                        <canvas id="canvasView"></canvas>
+                        <canvas id="canvasview"></canvas>
                     </div>
                     <div class="endModal" id="endModal">
                         <div class="endModalContent">
-                            <p id="aiThought">The AI thought your drawing was a(n) x</p><p id="congrats">Nice Work</p><p id="numberCurrentPoints">80 points</p>
-                            
-                            <input type="button" id="endModalButton" class="modalButton" onclick="nextRound()" value="Next Round">
+                            <input type="button" class="modalButton" onclick="nextRound()" value="Next Round">
                         </div>
                     </div>
                 </div>
                 <div class="mainRight">
                     <div class="drawA">
-                        <span>Draw a:</span></br>
+                        <span>draw a:</span></br>
                         <span id="drawObject"></span>
                     </div>
 
@@ -84,15 +81,11 @@
                         <p><strong>USER LIST</strong></p>
                         <ul id="ClientListHTML"></ul>
                     </div>
-
-                    <div id="MultiChallenge">
-                        
-                    </div>
                     <!--NODEJS THING END-->
 
                     <div class="total">
-                        <span>Total</span></br>
-                        <span id="totalPoints">0</span>
+                        <span>total</span></br>
+                        <span>100%</span>
                     </div>
                 </div>
             </div>
@@ -101,65 +94,63 @@
                     <span id="timeRemaining"></span>
                 </div>
             </div>
-        </div>
-        <script src="api.js"></script>
-        <script src="script.js"></script>
 
-        <!--NODE JS THINGS BELOW -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-            
-        <script>
-            function issue_challenge(from, to) {
-                socket.emit("CMulti", [from, to]);
-            }
+            <!--<div class="mainHead">
+                <div class="time"><span>Time Remaining: </span><span id="timer">6</span></div>
+                <div class="mainTitle">
+                    <div class="round"><span>Round: </span><span id="roundNumber">8</span>
+                    </div>
+                    <div class="prompt" id="prompt">
+                        Prompt
+                    </div>
+                    <div class="round"></div>
+                </div>
+            </div>
 
-            function confirm_issue_challenge(player_index) {
-                console.log(player_index);
-                if(player_index!=null) {
-                    var confirm_state = confirm(`Are you sure you want to issue a challenge to this ${client_list[player_index][1]}`)
-                } else {
-                    var confirm_state = confirm("Are you sure you want to issue a challenge to this player")
-                }
+            <div class="main">
+                <div class="scoreLine"><span id="nameScore">Your score is: </span><span id="score">0</span></div>
+                <div class="canvas">
+                    <div class="startModal" id="startModal">
+                        <div class="startModalContent"></div>
+                    </div>
+                    <canvas id="mainCanvas" height="" width=""></canvas>
+                    <div class="dots">
+                        <span class="dot" id="dotRed" onclick=""></span>
+                        <span class="dot" id="dotYellow"></span>
+                        <span class="dot" id="dotBlue"></span>
+                        <span class="dot" id="dotBlack"></span>
+                        <span class="dot" id="dotWhite"></span>
+                    </div> 
+                </div>
+            </div>
 
-                if(confirm_state == true) {
-                    // Hardcoded for now but 10.89.220.193 should be changed to the ip of the current device. IDK how to get ur own ip addr in html though.
-                    issue_challenge("10.89.220.193", client_list[player_index][0]);
-                }
-            }
-    
-
-            const socket = io();
-
-            var client_list = [];
-
-            socket.on("UpdateClientList", (clients) => {
-                console.log("Client List: ");
-                client_list = clients;
-                console.log(client_list);
-                
-                document.getElementById("ClientListHTML").innerHTML = "";
-                for(var i=0;i<client_list.length;i++) {
-                    console.log(client_list[i][1]);
-                    document.getElementById("ClientListHTML").innerHTML += `<li><a href='javascript:confirm_issue_challenge(${i})'>` + client_list[i][1] + "<a></li>"; 
-                }
-            });
-
-            socket.on("IncomingChallenge", function(sender) {
-                accept_state = confirm(`Do you want to accept a challenge from ${sender}?`);
-
-                if (accept_state == true) {
-                    // if accept challenge
-                    alert("NEW MULTIPLAYER GAME BEGINNING");
-                    socket.emit('CAccepted', sender);
-                }
-            });
-
-            socket.on("CAccepted", function(data) {
-                alert("CHALLENGE ACCEPTED, NEW GAME BEGINNING!");
-            });
-            
-            
-
-        </script>
+            <div class="mainFoot">
+                <div class="footLeft"></div>
+                <div class="percent"><span>Your Score: </span><span id="score"></span></div>
+            </div>-->
+        </div>  
     </body>
+    <script src="api.js"></script>
+    <script src="script.js"></script>
+
+    <!--NODE JS THINGS BELOW -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+        
+    <script>
+        const socket = io();
+
+        var client_list = [];
+
+        socket.on("UpdateClientList", (clients) => {
+            console.log("Client List: ");
+            client_list = clients;
+            console.log(client_list);
+            
+            document.getElementById("ClientListHTML").innerHTML = "";
+            for(var i=0;i<clients.length;i++) {
+                document.getElementById("ClientListHTML").innerHTML += "<li><a href>" + clients[i] + "<a></li>"; 
+            }
+        }); 
+
+    </script>
 </html>

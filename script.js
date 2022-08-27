@@ -24,7 +24,7 @@ $('#round').text("ROUND "+round);
 // last known position
 let pos = { x: 0, y: 0 };
 
-window.addEventListener('resize', resize);
+canvas.addEventListener('resize', resize);
 document.addEventListener('mousemove', draw);
 document.addEventListener('mousedown', setPosition);
 document.addEventListener('touchstart', setPosition);
@@ -65,7 +65,9 @@ $(document).click(function(){
 $('#pencil')[0].click(function(){col = $("#colorpicker")[0].value;});
 $('#eraser')[0].click(function(){col = "#e2ebf0";});
 
+
 function draw(e) {
+  console.log("draw "+col);
   // mouse left button must be pressed
   if (e.buttons !== 1) return;
   // pos.x 
@@ -115,6 +117,7 @@ function startRound() {
 
   let timerInterval = setInterval(() => {
     setTimer(currentTime);
+    console.log("currentTime "+currentTime);
     currentTime--;
     if(currentTime < 0){
       clearInterval(timerInterval);
@@ -140,36 +143,32 @@ function endTime(){
   $('#congrats').text("");
   $('#numberCurrentPoints').text("");
   $('#endModalButton').hide();
-  submit_image((score, top_categories) => {    
-    let thought = "The AI had no clue what on earth you drew..."
-    let congrats = "Do better!"
+  submit_image((score, top_categories) => {
+    // score is an integer in range [0, 100]
+    // top_categories is an array of strings
+    let categories = top_categories;
+    console.log('your score was ' + score + ' of 100')
+    console.log(categories);
 
-    if (top_categories.length > 0) {
-      let cat_art = top_categories.map((category) => {
-        let desc = category.description;
-        const vowels = "aeiouAEIOU";
-        let is_vowel = vowels.includes(desc[0])
-        let article = is_vowel ? 'an' : 'a';
-        return `${article} ${desc}`;
-      });
-
-      if (top_categories[0].description === currentPrompt) {
-        thought = `The AI thought your drawing was ${cat_art[0]}.`;
-        congrats = "Nice Work!";
-      } else {
-        congrats = "Get good.";
-
-        if (top_categories.length == 1) {
-          thought = `Oops! The AI thought your drawing was ${cat_art[0]}.`;
-        } else {
-          thought = `Oops! The AI thought your drawing was ${cat_art[0]}, or maybe ${cat_art[1]}??`;
-        }
-      }
+    if(currentPrompt == categories[0]){
+      if(categories[0][0] == 'a')
+        $('#aiThought').text("The AI thought your drawing was an " + categories[0]);
+      else
+        $('#aiThought').text("The AI thought your drawing was a " + categories[0]);
+      
+      $('#congrats').text("Nice Work!");
+      $('#numberCurrentPoints').text(score + " points");
     }
+    else {
+      if(categories[0][0] == 'a')
+        $('#aiThought').text("Oops! The AI thought your drawing was an "+categories[0]+". Or maybe a "+categories[1]+"???");
+      else
+        $('#aiThought').text("Oops! The AI thought your drawing was a "+categories[0]+". Or maybe a "+categories[1]+"???");
 
-    $('#aiThought').text(thought);
-    $('#congrats').text(congrats);
-    $('#numberCurrentPoints').text("+" + score + " points");
+      $('#congrats').text("Get good.");
+      $('#numberCurrentPoints').text(score + " points");
+    }
+    totalScore+=score;
     $('#totalPoints').text(totalScore);
     $('#endModalButton').show();
   });
@@ -177,7 +176,9 @@ function endTime(){
 
 function nextRound(){
   round++;
+  //edit round number
   $('#round').text("ROUND "+round);
+  //totalScore = totalScore + score;
   hideEnd();
   showStart();
 }
@@ -200,8 +201,8 @@ function eraser(){
 function pencil(){
   erase = false;
   col = $("#colorpicker")[0].value;
-  $('#per').css("border", "0px dashed white");
-  $('#pen').css("border", "2px dashed white");
+  $('#per').css("border", "0px dashed", "#e2ebf0");
+  $('#pen').css("border", "2px dashed", "#e2ebf0");
 }
 
 function penSizeChange(){
@@ -226,3 +227,12 @@ function showEnd(){
 function hideEnd(){
   $('#endModal').hide();
 }
+
+/*
+
+$('element').html() = "";
+
+for(let i = 0; i < arr.length; i++){
+  $('element').html()+="<p><a href=\""+link+"\">"+name+"</a></p>"
+}
+*/
