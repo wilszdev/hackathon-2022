@@ -3,8 +3,7 @@ let currentPromptId;
 
 $(document).ready(function() {
   $('#canvasDiv').hide();
-  $('#endModal').show();
-  $('#startModal').hide();
+  $('#endModal').hide();
   
   resize();
   pencil();
