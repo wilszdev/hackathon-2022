@@ -24,7 +24,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 prompts = {}
 
 
-prompt_options = ('duck', 'apple', 'amongus', 'minions', 'piano')
+prompt_options = ('duck', 'apple', 'among us', 'Minions (Despicable Me)', 'piano', 'shark', 'tree', 'goldfish', 'house', 'car')
 
 
 def get_prompt() -> str:
