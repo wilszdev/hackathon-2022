@@ -17,8 +17,7 @@ let ctx = canvas.getContext('2d');
 resize();
 
 let round = 1;
-let roundPoints = 0;
-let totalScore = 0
+let totalScore = 0;
 
 $('#round').text("ROUND "+round);
 
@@ -90,8 +89,8 @@ function hideNameModal(){
   $(".nameCollector")[0].style.opacity = 0;
 }
 
-$("#nameButton")[0].click(function(){
-  $("#nameScore")[0].html() = $('#nameInput')[0].value+": ";
+$("#nameButton").click(function name(){
+  console.log($('#nameButton').val());
   hideNameModal();
 });
 
@@ -112,7 +111,6 @@ function startRound() {
 
   clearCanvas();
 
-  const timeLimit = 20;
   let currentTime = timeLimit;
 
   $("#timeRemaining").text(timeLimit + " seconds left");
@@ -147,7 +145,28 @@ function endTime(){
     console.log('your score was ' + score + ' of 100')
     console.log(top_categories)
   });
-  //edit modal
+  if(currentPrompt == top_categories[0]){
+    if(top_categories[0][0] == 'a','e','i','o','u')
+    switch(top_categories[0][0]){
+      case 'a','e','i','o','u':
+        $('#aiThought').text("The AI thought your drawing was an " + top_categories[0]);
+        break;
+      default:
+        $('#aiThought').text("The AI thought your drawing was a " + top_categories[0]);
+        break;
+    }
+    
+    $('#congrats').text("Nice Work!");
+    $('#numberCurrentPoints').text(score + " points");
+  }
+  else {
+    $('#aiThought').text("Oops! The AI thought your drawing was a(n) "+top_categories[0]+". Or maybe a "+top_categories[1]+"???");
+    $('#congrats').text("Get good.");
+    $('#numberCurrentPoints').text(score + " points");
+  }
+  totalScore+=score;
+  $('#totalPoints').text(totalPoints);
+
   //add points
   //change points on screen;
 }
@@ -205,3 +224,12 @@ function showEnd(){
 function hideEnd(){
   $('#endModal').hide();
 }
+
+/*
+
+$('element').html() = "";
+
+for(let i = 0; i < arr.length; i++){
+  $('element').html()+="<p><a href=\""+link+"\">"+name+"</a></p>"
+}
+*/

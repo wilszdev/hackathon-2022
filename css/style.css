@@ -1,9 +1,10 @@
 :root {
     --main-color: rgb(46, 100, 128);
     --darker-color: rgb(20,29,66);
-    --light-color: rgb(128,177,199);
+    --light-color: rgb(106, 155, 178);
     --white: rgb(225, 234, 239);
     --font-size: 1.5em;
+    --font-family: "Patrick Hand"
 }
 /*body*/
 body{
@@ -11,7 +12,7 @@ body{
     background-color: var(--main-color);
     color: var(--white);
     user-select: none;
-    font-family: "Patrick Hand";
+    font-family: var(--font-family);
 }
 /*head*/
 .header{
@@ -102,6 +103,18 @@ canvas{
     color: var(--white);
     text-shadow: 1px 1px 2px rgb(13, 34, 63);
 }
+input, button{
+    font-family: var(--font-family);
+    border: none;
+}
+.modalButton{
+    text-align: center;
+    background-color: #cb8073;
+    color: var(--white);
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: calc(var(--font-size) * 0.6);
+}
 
 /*right*/
 .mainRight{
@@ -126,7 +139,15 @@ em{
     text-align: center;
 }
 .endModalContent p{
-    margin: 20px;
+    margin: 0;
+}
+.endModalContent input{
+    margin-top: 10px;
+}
+#congrats, #aiThought{
+    color: var(--darker-color);
+    text-shadow: none;
+    font-weight: 800;
 }
 
 
@@ -190,10 +211,10 @@ em{
 }
 .nameModalBottom div button{
     text-align: center;
-    height: 20px;
     width: 25%;
     background-color: #375663;
     color: var(--white);
     border: none;
     border-radius: 2px;
+    font-size: medium;
 }
