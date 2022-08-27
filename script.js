@@ -113,7 +113,7 @@ function startRound() {
 
   clearCanvas();
 
-  const timeLimit = 30;
+  const timeLimit = 20;
   let currentTime = timeLimit;
 
   $("#timeRemaining").text(timeLimit + " seconds left");
@@ -142,8 +142,11 @@ function endTime(){
   hideCanvas();
   showEnd();
   //send image
-  submit_image((score) => {
-    alert('your score was ' + score + ' of 100')
+  submit_image((score, top_categories) => {
+    // score is an integer in range [0, 100]
+    // top_categories is an array of strings
+    console.log('your score was ' + score + ' of 100')
+    console.log(top_categories)
   });
   //edit modal
   //add points
@@ -162,7 +165,7 @@ function nextRound(){
 function submit_image(callback) {
   canvas.toBlob((blob) => {
     api_submit_prompt(currentPromptId, blob, (response) => {
-      callback(response.score)
+      callback(response.score, response.categories)
     });
   }, "image/png");
 }

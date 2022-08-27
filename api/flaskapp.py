@@ -126,7 +126,7 @@ def make_submission_for_prompt(prompt_id):
     response = {
         'prompt_id': prompt_id,
         'score': score,
-        'categories': result_dict
+        'categories': list(result_dict.keys())
     }
 
     return jsonify(response), 200
