@@ -94,8 +94,8 @@ let listOfPrompts = ["Amongus", "Minion", "Apple", "Piano", "Amongus", "Minion",
 
 function startRound(){
 
-  $("#startModal").hide();
-  $("#canvasDiv").show();
+  hideStart();
+  showCanvas();
 
   //generate prompt
   if(listOfPrompts.length > 1){
@@ -109,7 +109,7 @@ function startRound(){
 
   clearCanvas();
 
-  const timeLimit = 10;
+  const timeLimit = 3;
   let currentTime = timeLimit;
 
   $("#timeRemaining").text(timeLimit + " seconds left");
@@ -121,10 +121,10 @@ function startRound(){
       currentTime--;
       if(currentTime < 0){
         clearInterval(timerInterval);
+        endTime();
       }
     }
   ,1000);
-  endTime();
 }
 
 function setTimer(i){
@@ -137,8 +137,8 @@ function setTimer(i){
 }
 
 function endTime(){
-  $('#canvasDiv').hide();
-  $("#endModal").show();
+  hideCanvas();
+  showEnd();
   //send image
   //edit modal
   //add points
@@ -150,8 +150,8 @@ function nextRound(){
   //edit round number
   $('#round').text("ROUND "+round);
   //totalScore = totalScore + score;
-  $('#endModal').style.display = "none";
-  $('#startModal').style.display = "block";
+  hideEnd();
+  showStart();
 }
 //$("#startModal").css("display","initial");
 
@@ -182,4 +182,23 @@ function eraser(){
 
 function penSizeChange(){
   lineWid = $('#sizes').val();
+}
+
+function showStart(){
+  $('#startModal').show();
+}
+function hideStart(){
+  $('#startModal').hide();
+}
+function showCanvas(){
+  $('#canvasDiv').show();
+}
+function hideCanvas(){
+  $('#canvasDiv').hide();
+}
+function showEnd(){
+  $('#endModal').show();
+}
+function hideEnd(){
+  $('#endModal').hide();
 }
