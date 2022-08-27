@@ -14,6 +14,6 @@ You'll be prompted to draw something that our AI has analysed. Skribbl.AI will t
 
 # Usage
 1. Clone this repo `git clone https://github.com/wilszdev/skribbl.ai.git`
-2. Install dependencies `pip install -r requirements.txt`
+2. Install dependencies `pip install -t lib -r requirements.txt`
 3. `gcloud app deploy`
 4. `gcloud app browse`
