@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:5000/api/prompts/"
+const baseUrl = "https://gothic-welder-360715.ts.r.appspot.com/api/prompts/"
 
 function api_xhr(method, url, data, callback) {
     req = new XMLHttpRequest();

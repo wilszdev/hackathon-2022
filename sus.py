@@ -5,7 +5,6 @@ from google.cloud.aiplatform.gapic.schema import predict
 
 
 credential_path = os.path.abspath("keyfile.json")
-print(f"{credential_path = }")
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
 
@@ -24,10 +23,8 @@ class SusClient:
         self.client = aiplatform.gapic.PredictionServiceClient(
             client_options=self.client_options)
 
-    def predict(self, filepath: str):
-        with open(filepath, "rb") as f:
-            file_content = f.read()
-        encoded_content = base64.b64encode(file_content).decode('utf-8')
+    def predict(self, file_bytes):
+        encoded_content = base64.b64encode(file_bytes).decode('utf-8')
         instance = predict.instance.ImageClassificationPredictionInstance(
             content=encoded_content
         ).to_value()
