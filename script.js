@@ -62,13 +62,13 @@ $(document).click(function(){
   }
 });
 
-$('#pencil')[0].click(function(){col = $("#colorpicker")[0].value;});
 $('#eraser')[0].click(function(){col = "#e2ebf0";});
 
 function draw(e) {
   // mouse left button must be pressed
   if (e.buttons !== 1) return;
   // pos.x 
+  $('#pencil')[0].click(function(){col = $("#colorpicker")[0].value;});
   ctx.beginPath(); // begin
 
   ctx.lineWidth = lineWid;
