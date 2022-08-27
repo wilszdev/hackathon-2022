@@ -1,7 +1,7 @@
 # Skribbl.AI
 
 **Skribbl.AI is inspired by popular online game skribbl.io, but with a twist**
-Made during the *UQCS Hackathon*
+## Made during the *UQCS Hackathon*
 # Concept:
 Draw based on our prompts, and our AI will give you a score. Compete with your friends in a fun web-based game!
 
