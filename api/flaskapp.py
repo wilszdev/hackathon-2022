@@ -8,7 +8,7 @@ import json
 from sus import SusClient
 from math import exp
 
-with open('.\\api\\config.json', 'r') as f:
+with open('config.json', 'r') as f:
     config = json.loads(f.read())
 
 sus_client = SusClient(project=config['project'],
@@ -49,10 +49,6 @@ prompt_options = (
     {
         'prompt': 'tree',
         'description': 'tree'
-    },
-    {
-        'prompt': 'goldfish',
-        'description': 'goldfish'
     },
     {
         'prompt': 'house',
