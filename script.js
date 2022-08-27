@@ -1,10 +1,14 @@
 $(document).ready(function() {
   $('#canvasDiv').hide();
   $('#endModal').hide();
+  resize();
+  pencil();
 });
 
+const timeLimit = 300;
+
 // get canvas 2D context and set him correct size
-let canvas = $('#canvasview')[0];
+let canvas = document.getElementById('canvasView');
 let ctx = canvas.getContext('2d');
 resize();
 
@@ -16,7 +20,7 @@ $('#round').text("ROUND "+round);
 // last known position
 let pos = { x: 0, y: 0 };
 
-window.addEventListener('resize', resize);
+canvas.addEventListener('resize', resize);
 document.addEventListener('mousemove', draw);
 document.addEventListener('mousedown', setPosition);
 document.addEventListener('touchstart', setPosition);
@@ -24,17 +28,17 @@ document.addEventListener('mouseenter', setPosition);
 
 // new position from mouse event
 function setPosition(e) {
-  pos.x = e.offsetX*1;
-  pos.y = e.offsetY*0.9;
+  pos.x = e.offsetX;
+  pos.y = e.offsetY;
 }
 
 
 // resize canvas
 function resize() {
-  $("#canvasview")[0].width = $("#canvasview")[0].clientWidth;
-  $("#canvasview")[0].height = $("#canvasview")[0].clientHeight;
-  ctx.width = $("#canvasview")[0].width;
-  ctx.height = $("#canvasview")[0].height;
+  var w = document.getElementById('canvasDiv').offsetWidth,
+	    h = document.getElementById('canvasDiv').offsetHeight;
+	ctx.canvas.width = w;
+	ctx.canvas.height = h;
 }
 
 //current colour of the line
@@ -87,7 +91,7 @@ $("#nameButton")[0].click(function(){
 });
 
 function clearCanvas(){
-  ctx.clearRect(0, 0, $('#canvasview')[0].width, $('#canvasview')[0].height);
+  ctx.clearRect(0, 0, $('#canvasView')[0].width, $('#canvasView')[0].height);
 }
 
 let listOfPrompts = ["Amongus", "Minion", "Apple", "Piano", "Amongus", "Minion", "Apple"]
@@ -96,7 +100,7 @@ function startRound(){
 
   hideStart();
   showCanvas();
-
+  resize();
   //generate prompt
   if(listOfPrompts.length > 1){
     let randInt = Math.floor(Math.random() * 10);
@@ -109,7 +113,6 @@ function startRound(){
 
   clearCanvas();
 
-  const timeLimit = 3;
   let currentTime = timeLimit;
 
   $("#timeRemaining").text(timeLimit + " seconds left");
