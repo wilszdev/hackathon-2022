@@ -18,7 +18,6 @@ function api_get_prompt(callback) {
 
     api_xhr("POST", url, null, (raw_response) => {
         response = JSON.parse(raw_response);
-        console.log(response)
         callback(response)
     });
 }
@@ -28,7 +27,6 @@ function api_submit_prompt(prompt_guid, blob, callback) {
 
     api_xhr("POST", url, blob, (raw_response)=>{
         response = JSON.parse(raw_response);
-        console.log(response)
         callback(response)
     });
 }

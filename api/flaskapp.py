@@ -1,4 +1,5 @@
 from random import choice
+from unittest import result
 from flask import Flask, abort, jsonify, request
 from time import time_ns
 from uuid import uuid4
@@ -24,39 +25,39 @@ prompts = {}
 prompt_options = (
     {
         'prompt': 'duck',
-        'description': 'duck'
+        'description': 'Duck'
     },
     {
         'prompt': 'apple',
-        'description': 'apple'
+        'description': 'Apple'
     },
     {
         'prompt': 'among_us',
-        'description': 'among us'
+        'description': 'Among Us'
     },
     {
         'prompt': 'minion',
-        'description': 'Minions (Despicable Me)'
+        'description': 'Minion'
     },
     {
         'prompt': 'piano',
-        'description': 'piano'
+        'description': 'Piano'
     },
     {
         'prompt': 'shark',
-        'description': 'shark'
+        'description': 'Shark'
     },
     {
         'prompt': 'tree',
-        'description': 'tree'
+        'description': 'Tree'
     },
     {
         'prompt': 'house',
-        'description': 'house'
+        'description': 'House'
     },
     {
         'prompt': 'car',
-        'description': 'car'
+        'description': 'Car'
     }
 )
 
@@ -119,10 +120,16 @@ def make_submission_for_prompt(prompt_id):
     else:
         print(f'prompt {prompt} not found')
 
+    categories = []
+    for name in result_dict.keys():
+        for p in prompt_options:
+            if p['prompt'] == name:
+                categories.append(p)
+    
     response = {
         'prompt_id': prompt_id,
         'score': score,
-        'categories': list(result_dict.keys())
+        'categories': categories
     }
 
     return jsonify(response), 200
