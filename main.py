@@ -72,6 +72,11 @@ def index():
     return app.send_static_file("index.html")
 
 
+@app.route('/multiplayer')
+def multiplayer():
+    return app.send_static_file("index_multiplayer.html")
+
+
 @app.route('/api/prompts/new', methods=["POST"])
 def create_round_get_prompt():
     prompt = {'id': guid(), 'ts': time_ns()}
@@ -95,10 +100,10 @@ def conf_to_score(confidence: float) -> int:
 @app.route('/api/prompts/<prompt_id>/submit', methods=["POST"])
 def make_submission_for_prompt(prompt_id):
     if request.content_type != 'image/png':
-        jsonify({'error': "bad request. expect image/png content"}), 400
+        jsonify({'msg': "expected image/png content"}), 400
 
     if prompt_id not in prompts:
-        jsonify({'error': "prompt not found", 'prompts': prompts}), 404
+        jsonify({'msg': "prompt not found"}), 404
 
     dst_folder = 'submissions'
     if not os.path.exists(dst_folder):
