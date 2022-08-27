@@ -6,6 +6,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <body>
         <div class="nameCollector">
@@ -24,7 +25,55 @@
             <span id="title">SKRIBBL.AI</span>
         </div>
         <div class="content">
-            <div class="mainHead">
+            <div class="top">
+                <div class="rnd">
+                    <span id="round">Round 1</span>
+                </div>
+            </div>
+            <div class="main">
+                <div class="mainLeft">
+                    <div class="tools">
+                        <div class="tool" id="tool1">Pencil</div>
+                        <div class="tool" id="tool2">Paint</div>
+                        <div class="tool" id="tool3">Eraser</div>
+                        <div class="tool" id="colourPickerDiv">
+                            <div style="text-align: center;">
+                                <label for="colorpicker">Color Picker:</label></br>
+                                <input type="color" id="colorpicker" value="#000000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mainCenter">
+                    <div class="canvasDiv">
+                        <canvas id="canvasview">
+
+                        </canvas>
+                    </div>
+                </div>
+                <div class="mainRight">
+                    <div class="drawA">
+                        <span>draw a:</span>
+                        <span id="drawObject"></span>
+                    </div>
+                    <div class="total">
+                        <span>total</span>
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="timer">
+                    <span id="timeRemaining"></span>
+                </div>
+            </div>
+
+
+
+
+
+
+            <!--<div class="mainHead">
                 <div class="time"><span>Time Remaining: </span><span id="timer">6</span></div>
                 <div class="mainTitle">
                     <div class="round"><span>Round: </span><span id="roundNumber">8</span>
@@ -56,7 +105,7 @@
             <div class="mainFoot">
                 <div class="footLeft"></div>
                 <div class="percent"><span>Your Score: </span><span id="score"></span></div>
-            </div>
+            </div>-->
         </div>
         <script src="script.js"></script>
     </body>

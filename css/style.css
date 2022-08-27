@@ -12,17 +12,91 @@ body{
 }
 .header{
     padding: 30px;
-    display: flex;
 }
 #title{
     font-size: min(300%, 80px);
     font-family: 'Fuzzy Bubbles';
 }
 .content{
-    margin: 3% 3% 5% 5%;
+    margin: 10px 5px 0 5px;
     font-size: 120%;
 }
-.mainHead, .main, .mainFoot{
+
+.top{
+    display: flex;
+    justify-content: center;
+}
+
+.main{
+    display: flex;
+    margin: 10px;
+}
+.mainLeft, .mainRight{
+    flex: 1;
+    flex-grow: 1;
+}
+.mainCenter{
+    flex: 3;
+}
+.mainleft{
+    display: flex;
+    justify-content: end;
+}
+.tools{
+    height: 100%;
+}
+.tool{
+    flex: 1;
+    text-align: end;
+    margin: 30px 0;
+}
+.canvasDiv{
+    height: 100%;
+    margin: 10px;
+}
+canvas{
+    width: 100%;
+    background-color: var(--white);
+    height: calc(100%);
+}
+
+.mainRight{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.mainHead, .main, .mainFoot{
     display: flex;
 }
 .time, .scoreLine, .footLeft{
@@ -98,7 +172,7 @@ body{
 }
 #dotWhite{
     background-color: white;
-}
+}*/
 .startModal{
     z-index: 1;
     position: absolute;
