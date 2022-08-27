@@ -36,7 +36,6 @@ function setPosition(e) {
   pos.y = e.offsetY;
 }
 
-
 // resize canvas
 function resize() {
   var w = document.getElementById('canvasDiv').offsetWidth,
@@ -101,9 +100,9 @@ function startRound() {
   showCanvas();
   resize();
 
-  api_get_prompt((p)=>{
+  api_get_prompt((p) => {
     currentPrompt = p.description
-    currentPromptId = p.id
+    currentPromptId = p.prompt
     $('#drawObject').text(currentPrompt);
   });
 

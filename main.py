@@ -1,5 +1,4 @@
 from random import choice
-from unittest import result
 from flask import Flask, jsonify, request
 from time import time_ns
 from uuid import uuid4
@@ -7,6 +6,8 @@ import os
 import json
 from sus import SusClient
 from math import exp
+
+
 
 with open('config.json', 'r') as f:
     config = json.loads(f.read())
@@ -16,45 +17,43 @@ sus_client = SusClient(project=config['project'],
 
 app = Flask(__name__, static_folder='static')
 
-prompts = {}
-
 
 prompt_options = (
     {
         'prompt': 'duck',
-        'description': 'Duck'
+        'description': 'duck'
     },
     {
         'prompt': 'apple',
-        'description': 'Apple'
+        'description': 'apple'
     },
     {
         'prompt': 'among_us',
-        'description': 'Among Us'
+        'description': 'among us'
     },
     {
         'prompt': 'minion',
-        'description': 'Minion'
+        'description': 'minion'
     },
     {
         'prompt': 'piano',
-        'description': 'Piano'
+        'description': 'piano'
     },
     {
         'prompt': 'shark',
-        'description': 'Shark'
+        'description': 'shark'
     },
     {
         'prompt': 'tree',
-        'description': 'Tree'
+        'description': 'tree'
     },
     {
         'prompt': 'house',
-        'description': 'House'
+        'description': 'house'
     },
     {
         'prompt': 'car',
-        'description': 'Car'
+        'description': 'car'
     }
 )
 
@@ -79,13 +78,7 @@ def multiplayer():
 
 @app.route('/api/prompts/new', methods=["POST"])
 def create_round_get_prompt():
-    prompt = {'id': guid(), 'ts': time_ns()}
-    prompt.update(get_prompt())
-
-    global prompts
-    prompts.update({prompt['id']: prompt})
-
-    return jsonify(prompt), 200
+    return jsonify(get_prompt()), 200
 
 
 def conf_to_score(confidence: float) -> int:
@@ -97,13 +90,10 @@ def conf_to_score(confidence: float) -> int:
         return int(exp(confidence * 10)/230) + 5
 
 
-@app.route('/api/prompts/<prompt_id>/submit', methods=["POST"])
-def make_submission_for_prompt(prompt_id):
+@app.route('/api/prompts/<prompt_name>/submit', methods=["POST"])
+def make_submission_for_prompt(prompt_name):
     if request.content_type != 'image/png':
         return jsonify({'msg': "expected image/png content"}), 400
-
-    if prompt_id not in prompts:
-        return jsonify({'msg': "prompt not found"}), 404
 
     dst_folder = 'submissions'
     if not os.path.exists(dst_folder):
@@ -112,14 +102,10 @@ def make_submission_for_prompt(prompt_id):
     data = request.get_data()
     result_dict = sus_client.predict(data)
 
-    prompt = prompts[prompt_id]['prompt']
-
     score = 0
-    if prompt in result_dict:
-        confidence = result_dict[prompt]
+    if prompt_name in result_dict:
+        confidence = result_dict[prompt_name]
         score = conf_to_score(confidence)
-    else:
-        print(f'prompt {prompt} not found')
 
     categories = []
     for name in result_dict.keys():
@@ -128,7 +114,7 @@ def make_submission_for_prompt(prompt_id):
                 categories.append(p)
     
     response = {
-        'prompt_id': prompt_id,
+        'prompt_id': prompt_name,
         'score': score,
         'categories': categories
     }
