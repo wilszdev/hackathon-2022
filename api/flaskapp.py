@@ -21,7 +21,48 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 prompts = {}
 
 
-prompt_options = ('duck', 'apple', 'among us', 'Minions (Despicable Me)', 'piano', 'shark', 'tree', 'goldfish', 'house', 'car')
+prompt_options = (
+    {
+        'prompt': 'duck',
+        'description': 'duck'
+    },
+    {
+        'prompt': 'apple',
+        'description': 'apple'
+    },
+    {
+        'prompt': 'amongus',
+        'description': 'among us'
+    },
+    {
+        'prompt': 'minion',
+        'description': 'Minions (Despicable Me)'
+    },
+    {
+        'prompt': 'piano',
+        'description': 'piano'
+    },
+    {
+        'prompt': 'shark',
+        'description': 'shark'
+    },
+    {
+        'prompt': 'tree',
+        'description': 'tree'
+    },
+    {
+        'prompt': 'goldfish',
+        'description': 'goldfish'
+    },
+    {
+        'prompt': 'house',
+        'description': 'house'
+    },
+    {
+        'prompt': 'car',
+        'description': 'car'
+    }
+)
 
 
 def get_prompt() -> str:
@@ -34,7 +75,8 @@ def guid() -> str:
 
 @app.route('/api/prompts/new', methods=["POST"])
 def create_round_get_prompt():
-    prompt = {'id': guid(), 'prompt': get_prompt(), 'ts': time_ns()}
+    prompt = {'id': guid(), 'ts': time_ns()}
+    prompt.update(get_prompt())
 
     global prompts
     prompts.update({prompt['id']: prompt})
@@ -78,10 +120,13 @@ def make_submission_for_prompt(prompt_id):
     if prompt in result_dict:
         confidence = result_dict[prompt]
         score = conf_to_score(confidence)
+    else:
+        print(f'prompt {prompt} not found')
 
     response = {
         'prompt_id': prompt_id,
-        'score': score
+        'score': score,
+        'categories': result_dict
     }
 
     return jsonify(response), 200
