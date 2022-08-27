@@ -72,7 +72,7 @@ def index():
     return app.send_static_file("index.html")
 
 
-@app.route('/multiplayer')
+@app.route('/multiplayer/')
 def multiplayer():
     return app.send_static_file("index_multiplayer.html")
 
