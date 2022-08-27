@@ -100,10 +100,10 @@ def conf_to_score(confidence: float) -> int:
 @app.route('/api/prompts/<prompt_id>/submit', methods=["POST"])
 def make_submission_for_prompt(prompt_id):
     if request.content_type != 'image/png':
-        jsonify({'msg': "expected image/png content"}), 400
+        return jsonify({'msg': "expected image/png content"}), 400
 
     if prompt_id not in prompts:
-        jsonify({'msg': "prompt not found"}), 404
+        return jsonify({'msg': "prompt not found"}), 404
 
     dst_folder = 'submissions'
     if not os.path.exists(dst_folder):
