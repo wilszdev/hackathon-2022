@@ -13,11 +13,13 @@
         <div class="nameCollector">
             <div class="nameBox">
                 <div class="nameModalContent">
-                    <span>Please Enter Your Name</span>
-                    <input id="nameInput"></input>
-                    <div>
-                        <button id="nameButton">Submit</button>
-                        <button id="guestButton" onclick="hideNameModal();">Guest</button>
+                    <span class="nameModalName">Please Enter Your Name</span>
+                    <div class="nameModalBottom">
+                        <input id="nameInput"></input>
+                        <div>
+                            <button id="nameButton">Submit</button>
+                            <button id="guestButton" onclick="hideNameModal();">Guest</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -66,6 +68,8 @@
                     </div>
                     <div class="endModal" id="endModal">
                         <div class="endModalContent">
+                            <p id="aiThought">The AI thought your drawing was a(n) x</br>Nice Work</br>n points</p>
+                            
                             <input type="button" class="modalButton" onclick="nextRound()" value="Next Round">
                         </div>
                     </div>
@@ -77,7 +81,7 @@
                     </div>
                     <div class="total">
                         <span>total</span></br>
-                        <span>100%</span>
+                        <span id="totalPoints">100%</span>
                     </div>
                 </div>
             </div>
