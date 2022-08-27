@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <title>Skribbl.AI</title>
+        <script src="https://use.fontawesome.com/da10055db3.js"></script>
         <link rel="stylesheet" href="css/style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,9 +34,9 @@
             <div class="main">
                 <div class="mainLeft">
                     <div class="tools">
-                        <div class="tool" id="tool1">Pencil</div>
-                        <div class="tool" id="tool2">Paint</div>
-                        <div class="tool" id="tool3">Eraser</div>
+                        <div class="tool" id="pencil" onclick="pencil()"><em class="fa fa-solid fa-pencil fa-lg"></em></div>
+                        <div class="tool" id="eraser" onclick="eraser()"><em class="fa fa-solid fa-eraser fa-lg"></em></div>
+                        <div class="tool" id="reset" onclick="clearCanvas()"><em class="fa fa-solid fa-rotate-right fa-lg"></em></div>
                         <div class="tool" id="colourPickerDiv">
                             <div style="text-align: center;">
                                 <label for="colorpicker">Color Picker:</label></br>
@@ -45,10 +46,18 @@
                     </div>
                 </div>
                 <div class="mainCenter">
+                    <div class="startModal">
+                        <div class="startModalContent">
+                            <input type="button">
+                        </div>
+                    </div>
+                    <div class="endModal">
+                        <div class="startModalContent">
+                            
+                        </div>
+                    </div>
                     <div class="canvasDiv">
-                        <canvas id="canvasview">
-
-                        </canvas>
+                        <canvas id="canvasview"></canvas>
                     </div>
                 </div>
                 <div class="mainRight">
