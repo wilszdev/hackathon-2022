@@ -17,6 +17,9 @@ body{
 /*head*/
 .header{
     padding: 30px 30px 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    
 }
 #title{
     font-size: min(300%, 80px);
@@ -153,7 +156,7 @@ em{
 
 /*name modal collector*/
 .nameCollector{
-    /*display: none;/*DELETE THIS LINE HERE*/
+    display: none;/*DELETE THIS LINE HERE*/
     position: absolute;
     width: 100%;
     height: 100%;

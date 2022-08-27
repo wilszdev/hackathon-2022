@@ -163,7 +163,12 @@ function endTime(){
       if(categories[0][0] == 'a')
         $('#aiThought').text("Oops! The AI thought your drawing was an "+categories[0]+". Or maybe a "+categories[1]+"???");
       else
-        $('#aiThought').text("Oops! The AI thought your drawing was a "+categories[0]+". Or maybe a "+categories[1]+"???");
+        if(categories.length == 0)
+          $('#aiThought').text("Oops! The AI didn't know what your drawing was???");
+        else if(categories.length == 1)
+          $('#aiThought').text("Oops! The AI thought your drawing was a "+categories[0]+".");
+        else
+          $('#aiThought').text("Oops! The AI thought your drawing was a "+categories[0]+". Or maybe a "+categories[1]+"???");
 
       $('#congrats').text("Get good.");
       $('#numberCurrentPoints').text(score + " points");
