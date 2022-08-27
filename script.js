@@ -1,17 +1,9 @@
-// create canvas element and append it to document body
-let canvas = document.getElementById('mainCanvas');
-
 // get canvas 2D context and set him correct size
-let ctx = canvas.getContext('2d');
+let ctx = document.getElementById('canvasview').getContext('2d');
 resize();
 
 // last known position
 let pos = { x: 0, y: 0 };
-
-//current colour of the line
-let col = '#c0392b';
-//current width of the line
-let lineWid = 1;
 
 window.addEventListener('resize', resize);
 document.addEventListener('mousemove', draw);
@@ -26,16 +18,27 @@ function setPosition(e) {
 
 // resize canvas
 function resize() {
-  canvas.width = document.getElementById('mainCanvas').offsetWidth;
-  canvas.height = document.getElementById('mainCanvas').offsetHeight;
-  ctx.canvas.width = canvas.width;
-  ctx.canvas.height = canvas.height;
+  $("#canvasview").width = $("#canvasview").offsetWidth;
+  $("#canvasview").height = $("#canvasview").offsetHeight;
+  ctx.width = $("#canvasview").width;
+  ctx.height = $("#canvasview").height;
 }
 
+//current colour of the line
+let col = document.getElementById('colorpicker').value;
+//current width of the line
+let lineWid = 3;
+
+console.log();
+document.addEventListener("click",function(){
+  col = document.getElementById('colorpicker').value;
+});
+
 function draw(e) {
+  console.log(col);
   // mouse left button must be pressed
   if (e.buttons !== 1) return;
-
+  // pos.x 
   ctx.beginPath(); // begin
 
   ctx.lineWidth = lineWid;
@@ -50,26 +53,26 @@ function draw(e) {
 }
 
 function hideNameModal(){
-  document.getElementsByClassName("nameCollector")[0].style.display = "none";
-  document.getElementsByClassName("nameCollector")[0].style.opacity = 0;
+  $(".nameCollector")[0].style.display = "none";
+  $(".nameCollector")[0].style.opacity = 0;
 }
 
-document.getElementById('nameButton').addEventListener("click",function(){
-  document.getElementById("nameScore").innerHTML = document.getElementById('nameInput').value+": ";
+$("#nameButton").click(function(){
+  $("#nameScore").innerHTML = $('#nameInput').value+": ";
   hideNameModal();
 });
 
-document.getElementById('startModal').addEventListener("click",function(){
+$("#startModal").click(function(){
   const timeLimit = 2;
   let timeLeft = timeLimit;
 
-  document.getElementById('startModal').style.display = "none";
+  $("#startModal").style.display = "none";
 
-  document.getElementById('timer').innerHTML = timeLeft;
+  $("#timer").innerHTML = timeLeft;
 
   let intervalTimer = setInterval(function f(){
     timeLeft--;
-    document.getElementById('timer').innerHTML = timeLeft;
+    $("#timer").innerHTML = timeLeft;
     
     if(timeLeft <= 0){
       clearInterval(intervalTimer);
@@ -81,7 +84,7 @@ document.getElementById('startModal').addEventListener("click",function(){
 });
 
 function setTimer(time){
-  document.getElementById('timer').innerHTML = time;
+  $("#timer").innerHTML = time;
   console.log();
 }
-function w(){}
+function w(){};
