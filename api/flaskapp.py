@@ -6,16 +6,13 @@ import os
 from flask_cors import CORS
 import json
 from sus import SusClient
-
+from math import exp
 
 with open('.\\api\\config.json', 'r') as f:
     config = json.loads(f.read())
 
-
-sus_client = SusClient(
-    project=config['project'],
-    endpoint_id=config['endpoint_id'])
-
+sus_client = SusClient(project=config['project'],
+                       endpoint_id=config['endpoint_id'])
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -45,6 +42,15 @@ def create_round_get_prompt():
     return jsonify(prompt), 200
 
 
+def conf_to_score(confidence: float) -> int:
+    assert 0 <= confidence <= 1, "confidence domain"
+
+    if 0 <= confidence < 0.5:
+        return int(confidence*10)
+    else:
+        return int(exp(confidence * 10)/230) + 5
+
+
 @app.route('/api/prompts/<prompt_id>/submit', methods=["POST"])
 def make_submission_for_prompt(prompt_id):
     if request.content_type != 'image/png':
@@ -71,7 +77,7 @@ def make_submission_for_prompt(prompt_id):
     score = 0
     if prompt in result_dict:
         confidence = result_dict[prompt]
-        score = int(confidence * 100)
+        score = conf_to_score(confidence)
 
     response = {
         'prompt_id': prompt_id,

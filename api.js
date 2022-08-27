@@ -1,7 +1,6 @@
 const baseUrl = "http://localhost:5000/api/prompts/"
 
 function api_xhr(method, url, data, callback) {
-    console.log('building request to ', url)
     req = new XMLHttpRequest();
     req.open(method, url, true);
 
