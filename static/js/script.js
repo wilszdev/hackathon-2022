@@ -36,7 +36,6 @@ let pos = { x: 0, y: 0 };
 window.addEventListener('resize', resize);
 document.addEventListener('mousemove', draw);
 document.addEventListener('touchmove', draw);
-document.addEventListener('touchmove', alert());
 
 document.addEventListener('mousedown', setPosition);
 document.addEventListener('touchstart', setPosition);
@@ -45,8 +44,8 @@ document.addEventListener('mouseenter', setPosition);
 
 // new position from mouse event
 function setPosition(e) {
-  pos.x = e.offsetX;
-  pos.y = e.offsetY;
+  pos.x = xCursorPosition - canvas.getBoundingClientRect()["x"];
+  pos.y = yCursorPosition - canvas.getBoundingClientRect()["y"];
 }
 
 // resize canvas
