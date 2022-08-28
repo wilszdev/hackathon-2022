@@ -238,11 +238,6 @@ function hideEnd(){
 }
 
 
-
-
-
-
-
 function startup() {
   canvas.addEventListener('touchstart', handleStart);
   canvas.addEventListener('touchend', handleEnd);
