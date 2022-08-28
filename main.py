@@ -130,7 +130,7 @@ def make_submission_for_prompt(prompt_name: str):
         'img': base64.b64encode(data).decode('utf-8')
     })
 
-    while len(recent_submissions) > 5:
+    while len(recent_submissions) > 6:
         recent_submissions.popleft()
 
     return jsonify(response), 200
