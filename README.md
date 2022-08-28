@@ -3,7 +3,7 @@
 **[Skribbl.AI](https://gothic-welder-360715.ts.r.appspot.com) is inspired by popular online game [skribbl.io](https://skribbl.io), but with a twist**
 ## Made during the *UQCS Hackathon*
 # Concept:
-Draw based on our prompts, and our AI will give you a score. Compete with your friends in a fun web-based game!
+Draw based on our prompts, and our AI will give you a score. Test your drawing skills against our AI in a fun web-based game!
 
 Made with:
 * Flask
