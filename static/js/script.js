@@ -97,16 +97,6 @@ function draw(e) {
   ctx.stroke(); // draw it!
 }
 
-function hideNameModal(){
-  $(".nameCollector")[0].style.display = "none";
-  $(".nameCollector")[0].style.opacity = 0;
-}
-
-$("#nameButton").click(function name(){
-  console.log($('#nameButton').val());
-  hideNameModal();
-});
-
 function clearCanvas(){
   ctx.clearRect(0, 0, $('#canvasView')[0].width, $('#canvasView')[0].height);
 }
@@ -253,35 +243,6 @@ function hideEnd(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function startup() {
   canvas.addEventListener('touchstart', handleStart);
   canvas.addEventListener('touchend', handleEnd);
@@ -406,5 +367,3 @@ function handleStart(evt) {
 //   const container = document.getElementById('log');
 //   container.textContent = `${msg} \n${container.textContent}`;
 // }
-
-            
