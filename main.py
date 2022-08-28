@@ -5,7 +5,7 @@ import json
 from sus import SusClient
 from math import exp
 from collections import deque
-
+import base64
 
 
 with open('config.json', 'r') as f:
@@ -94,7 +94,7 @@ recent_submissions = deque()
 
 @app.route('/api/prompts/recent')
 def get_recent_subs():
-    return jsonify(recent_submissions), 200
+    return jsonify(list(recent_submissions)), 200
 
 
 @app.route('/api/prompts/<prompt_name>/submit', methods=["POST"])
@@ -114,27 +114,26 @@ def make_submission_for_prompt(prompt_name: str):
     for name in result_dict.keys():
         for p in prompt_options:
             if p['prompt'] == name:
-                categories.append(p);
-    
+                categories.append(p)
+
     response = {
         'prompt_id': prompt_name,
         'score': score,
         'categories': categories
-    };
+    }
 
-    desc = prompt_name.replace('_', ' ');
+    desc = prompt_name.replace('_', ' ')
 
     recent_submissions.append({
         'description': desc,
         'score': score,
-        'img': data
-    });
+        'img': base64.b64encode(data).decode('utf-8')
+    })
 
     while len(recent_submissions) > 5:
-        recent_submissions.popleft();
+        recent_submissions.popleft()
 
     return jsonify(response), 200
-
 
 
 if __name__ == '__main__':
