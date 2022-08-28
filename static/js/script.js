@@ -1,5 +1,6 @@
 let currentPrompt;
 let currentPromptId;
+let currentTimeRemaining;
 
 $(document).ready(function() {
   $('#canvasDiv').hide();
@@ -108,14 +109,14 @@ function startRound() {
 
   clearCanvas();
 
-  let currentTime = timeLimit;
+  currentTimeRemaining = timeLimit;
 
   $("#timeRemaining").text(timeLimit + " seconds left");
 
   let timerInterval = setInterval(() => {
-    setTimer(currentTime);
-    currentTime--;
-    if(currentTime < 0){
+    setTimer(currentTimeRemaining);
+    currentTimeRemaining--;
+    if(currentTimeRemaining < 0){
       clearInterval(timerInterval);
       endTime();
     }
@@ -129,6 +130,10 @@ function setTimer(i){
   else{
     $("#timeRemaining").text(i + " seconds left");
   }
+}
+
+function doSkip() {
+  currentTimeRemaining = -1
 }
 
 function endTime(){
