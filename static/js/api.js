@@ -14,8 +14,8 @@ function api_xhr(method, url, data, callback) {
 }
 
 function api_get_prompt(callback) {
-    url = baseUrl + 'new'
-
+    url = `${baseUrl}new`
+    
     api_xhr("POST", url, null, (raw_response) => {
         response = JSON.parse(raw_response);
         callback(response)
@@ -23,9 +23,18 @@ function api_get_prompt(callback) {
 }
 
 function api_submit_prompt(prompt_guid, blob, callback) {
-    url = baseUrl + prompt_guid + '/submit'
+    url = `${baseUrl}${prompt_guid}/submit`
+    
+    api_xhr("POST", url, blob, (raw_response) => {
+        response = JSON.parse(raw_response);
+        callback(response)
+    });
+}
 
-    api_xhr("POST", url, blob, (raw_response)=>{
+function api_get_recent(callback) {
+    url = `${baseUrl}recent`
+
+    api_xhr("GET", url, null, (raw_response) => {
         response = JSON.parse(raw_response);
         callback(response)
     });

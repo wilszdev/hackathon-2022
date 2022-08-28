@@ -1,11 +1,10 @@
 from random import choice
 from flask import Flask, jsonify, request
-from time import time_ns
 from uuid import uuid4
-import os
 import json
 from sus import SusClient
 from math import exp
+from collections import deque
 
 
 
@@ -90,14 +89,18 @@ def conf_to_score(confidence: float) -> int:
         return int(exp(confidence * 10)/230) + 5
 
 
+recent_submissions = deque()
+
+
+@app.route('/api/prompts/recent')
+def get_recent_subs():
+    return jsonify(recent_submissions), 200
+
+
 @app.route('/api/prompts/<prompt_name>/submit', methods=["POST"])
-def make_submission_for_prompt(prompt_name):
+def make_submission_for_prompt(prompt_name: str):
     if request.content_type != 'image/png':
         return jsonify({'msg': "expected image/png content"}), 400
-
-    dst_folder = 'submissions'
-    if not os.path.exists(dst_folder):
-        os.mkdir(dst_folder)
 
     data = request.get_data()
     result_dict = sus_client.predict(data)
@@ -111,15 +114,27 @@ def make_submission_for_prompt(prompt_name):
     for name in result_dict.keys():
         for p in prompt_options:
             if p['prompt'] == name:
-                categories.append(p)
+                categories.append(p);
     
     response = {
         'prompt_id': prompt_name,
         'score': score,
         'categories': categories
-    }
+    };
+
+    desc = prompt_name.replace('_', ' ');
+
+    recent_submissions.append({
+        'description': desc,
+        'score': score,
+        'img': data
+    });
+
+    while len(recent_submissions) > 5:
+        recent_submissions.popleft();
 
     return jsonify(response), 200
+
 
 
 if __name__ == '__main__':
