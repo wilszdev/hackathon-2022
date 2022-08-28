@@ -233,3 +233,9 @@ a{
 em{
     padding: 16px 4px;
 }
+table, th, td {
+    border: 3px solid;
+  }
+  td{
+    margin: 10px;
+  }

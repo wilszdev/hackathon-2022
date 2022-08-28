@@ -2,6 +2,14 @@ let currentPrompt;
 let currentPromptId;
 let currentTimeRemaining;
 
+var xCursorPosition = -1;
+var yCursorPosition = -1;
+function getCursorPosition(event) {
+  xCursorPosition = event.clientX;
+  yCursorPosition = event.clientY;
+  console.log("xCursorPosition "+xCursorPosition+" yCursorPosition "+yCursorPosition);
+}
+
 $(document).ready(function() {
   $('#canvasDiv').hide();
   $('#endModal').hide();
@@ -27,8 +35,12 @@ let pos = { x: 0, y: 0 };
 
 window.addEventListener('resize', resize);
 document.addEventListener('mousemove', draw);
+document.addEventListener('touchmove', draw);
+document.addEventListener('touchmove', alert());
+
 document.addEventListener('mousedown', setPosition);
 document.addEventListener('touchstart', setPosition);
+
 document.addEventListener('mouseenter', setPosition);
 
 // new position from mouse event
@@ -66,7 +78,8 @@ $('#eraser')[0].click(function(){col = "#e2ebf0";});
 
 function draw(e) {
   // mouse left button must be pressed
-  if (e.buttons !== 1) return;
+  if (e.buttons !== 1 ^ xCursorPosition> canvas.getBoundingClientRect()["x"]+canvas.getBoundingClientRect()["width"] ^ yCursorPosition>canvas.getBoundingClientRect()["y"]+canvas.getBoundingClientRect()["height"] ^ xCursorPosition<canvas.getBoundingClientRect()["x"] ^ yCursorPosition<canvas.getBoundingClientRect()["y"])
+    return;
   // pos.x 
   $('#pencil')[0].click(function(){col = $("#colorpicker")[0].value;});
   ctx.beginPath(); // begin
@@ -231,3 +244,4 @@ function showEnd(){
 function hideEnd(){
   $('#endModal').hide();
 }
+
