@@ -1,20 +1,14 @@
-var xCursorPosition = -1;
-var yCursorPosition = -1;
-function getCursorPosition(event) {
-  xCursorPosition = event.clientX;
-  yCursorPosition = event.clientY;
-  console.log("xCursorPosition "+xCursorPosition+" yCursorPosition "+yCursorPosition);
-}
+function displayAll() {
+  api_get_recent((results)=>{
+    for (let i = 0; i < results.length; ++i) {
+      let n = i + 1;
+      $(`#image${n}`).src(`data:image/png;base64,${results.img}`)
+      $(`#prompt${n}`).text(results.desc)
+      $(`#score${n}`).text(results.score)
+    }
+  });
+};
 
-$("#nameButton").click(function name(){
-  console.log($('#nameButton').val());
-  hideNameModal();
-});
-
-function submit_image(callback) {
-  canvas.toBlob((blob) => {
-    api_submit_prompt(currentPromptId, blob, (response) => {
-      callback(response.score, response.categories)
-    });
-  }, "image/png");
-}
+interval = setInterval(() => {
+  displayAll();
+}, 1000);
