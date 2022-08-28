@@ -11,7 +11,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <body onmousemove="getCursorPosition(event)">
-        <button id="skipButton" onclick="doSkip();">Skip</button>
         <div class="nameCollector">
             <div class="nameBox">
                 <div class="nameModalContent">
@@ -94,8 +93,8 @@
                 </div>
             </div>
             <div class="bottom">
-                <div class="timer">
-                    <span id="timeRemaining"></span>
+                <div class="timer" id="timer">
+                    <span id="timeRemaining"></span><button id="skipButton" onclick="doSkip();">Skip</button>
                 </div>
             </div>
         </div>

@@ -13,6 +13,7 @@ function getCursorPosition(event) {
 $(document).ready(function() {
   $('#canvasDiv').hide();
   $('#endModal').hide();
+  $('#timer').hide();
   
   resize();
   pencil();
@@ -38,7 +39,6 @@ document.addEventListener('mousemove', draw);
 document.addEventListener('touchmove', draw);
 
 document.addEventListener('mousedown', setPosition);
-document.addEventListener('touchstart', setPosition);
 
 document.addEventListener('mouseenter', setPosition);
 
@@ -77,8 +77,12 @@ $('#eraser')[0].click(function(){col = "#e2ebf0";});
 
 function draw(e) {
   // mouse left button must be pressed
-  if (e.buttons !== 1 ^ xCursorPosition> canvas.getBoundingClientRect()["x"]+canvas.getBoundingClientRect()["width"] ^ yCursorPosition>canvas.getBoundingClientRect()["y"]+canvas.getBoundingClientRect()["height"] ^ xCursorPosition<canvas.getBoundingClientRect()["x"] ^ yCursorPosition<canvas.getBoundingClientRect()["y"])
+  if (e.buttons !== 1)
     return;
+  if(xCursorPosition> canvas.getBoundingClientRect()["x"]+canvas.getBoundingClientRect()["width"] ^ yCursorPosition>canvas.getBoundingClientRect()["y"]+canvas.getBoundingClientRect()["height"] ^ xCursorPosition<canvas.getBoundingClientRect()["x"] ^ yCursorPosition<canvas.getBoundingClientRect()["y"]){
+    ctx.clearPath();
+    return;
+  } 
   // pos.x 
   $('#pencil')[0].click(function(){col = $("#colorpicker")[0].value;});
   ctx.beginPath(); // begin
@@ -114,7 +118,7 @@ function startRound() {
   currentTimeRemaining = timeLimit;
 
   $("#timeRemaining").text(timeLimit + " seconds left");
-
+  $('#timer').show();
   let timerInterval = setInterval(() => {
     setTimer(currentTimeRemaining);
     currentTimeRemaining--;
@@ -234,3 +238,32 @@ function hideEnd(){
   $('#endModal').hide();
 }
 
+function startup() {
+  canvas.addEventListener('touchstart', handleStart);
+  canvas.addEventListener('touchend', handleEnd);
+  canvas.addEventListener('touchcancel', handleCancel);
+  canvas.addEventListener('touchmove', handleMove);
+}
+
+document.addEventListener("DOMContentLoaded", startup);
+
+const ongoingTouches = [];
+
+function handleStart(evt) {
+  evt.preventDefault();
+  log('touchstart.');
+  const el = document.getElementById('canvas');
+  const ctx = el.getContext('2d');
+  const touches = evt.changedTouches;
+
+  for (let i = 0; i < touches.length; i++) {
+    log(`touchstart: ${i}.`);
+    ongoingTouches.push(copyTouch(touches[i]));
+    const color = colorForTouch(touches[i]);
+    log(`color of touch with id ${touches[i].identifier} = ${color}`);
+    ctx.beginPath();
+    ctx.arc(touches[i].pageX, touches[i].pageY, 4, 0, 2 * Math.PI, false);  // a circle at the start
+    ctx.fillStyle = color;
+    ctx.fill();
+  }
+}
