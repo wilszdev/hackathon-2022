@@ -45,41 +45,40 @@
             </div>
             <div class="main">
                 <div class="mainLeft">
-                    <div class="tools">
-                        <div class="tool" id="pencil" onclick="pencil()"><em class="fa fa-solid fa-pencil fa-lg" id="pen"></em></div>
-                        <div class="tool" id="eraser" onclick="eraser()"><em class="fa fa-solid fa-eraser fa-lg" id="per"></em></div>
-                        <div class="tool" id="reset" onclick="clearCanvas()"><em class="fa fa-solid fa-rotate-right fa-lg"></em></div>
-                        <div class="tool" id="penSize">
-                            <label for="penSize">Pen Size:</label>
-                            <select name="pensize" id="sizes" onchange="penSizeChange()">
-                                <option value="3">1</option>
-                                <option value="6">2</option>
-                                <option value="9">3</option>
-                                <option value="15">4</option>
-                            </select>
-                        </div>
-                        <div class="tool" id="colourPickerDiv">
-                            <div style="text-align: center;">
-                                <label for="colorpicker">Color Picker:</label></br>
-                                <input type="color" id="colorpicker" value="#000000">
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="mainCenter">
                     <div class="startModal" id="startModal">
                         <div class="startModalContent">
-                            <input type="button" class="modalButton" onclick="startRound()" value="Start Round">
+                            <table style="text-align: center;">
+                                <tr>
+                                    <td><span id="name1">xyz</span> drew a <span id="prompt1">prompt</span> and scored <span id="score1"></span></br>
+                                        <img height="20%" src="images\real-ai-1110x9999.jpg">
+                                    </td>
+                                    <td> <span id="name2">xyz</span> drew a <span id="prompt2">prompt</span> and scored <span id="score2"></span></br>
+                                        <img src="image.jpg">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> <span id="name3">xyz</span> drew a <span id="prompt3">prompt</span> and scored <span id="score3"></span></br>
+                                        <img src="image.jpg">
+                                    </td>
+                                    <td> <span id="name4">xyz</span> drew a <span id="prompt4">prompt</span> and scored <span id="score4"></span></br>
+                                        <img src="image.jpg">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> <span id="name5">xyz</span> drew a <span id="prompt5">prompt</span> and scored <span id="score5"></span></br>
+                                        <img src="image.jpg">
+                                    </td>
+                                    <td> <span id="name6">xyz</span> drew a <span id="prompt6">prompt</span> and scored <span id="score6"></span></br>
+                                        <img src="image.jpg">
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
-                    <div class="canvasDiv" id="canvasDiv">
-                        <canvas id="canvasView"></canvas>
-                    </div>
-                    <div class="endModal" id="endModal">
-                        <div class="endModalContent">
-                            <p id="aiThought">The AI thought your drawing was a(n) x</p><p id="congrats">Nice Work</p><p id="numberCurrentPoints">80 points</p>
-                            
-                            <input type="button" id="endModalButton" class="modalButton" onclick="nextRound()" value="Next Round">
+                    <div class="displayModal" id="displayModal">
+                        <div class="displayModalContent">                              
                         </div>
                     </div>
                     <div class="timer">
@@ -87,20 +86,6 @@
                     </div>
                 </div>
                 <div class="mainRight">
-                    <div class="drawA">
-                        <span>Draw a:</span></br>
-                        <span id="drawObject"></span>
-                    </div>
-                    <div class="mainRightBottom">
-                        <div class="total">
-                            <p id="name1">Name</p>
-                            <p id="totalPoints1">0</p>
-                        </div>
-                        <div class="total">
-                            <p>Name</p>
-                            <p id="totalPoints2">0</p>
-                        </div> 
-                    </div>
                 </div>
             </div>
             <div class="bottom">
@@ -108,6 +93,6 @@
             </div>
         </div>
         <script src="api.js"></script>
-        <script src="script.js"></script>
+        <script src="multiplayer_script.js"></script>
     </body>
 </html>

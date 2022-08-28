@@ -33,8 +33,12 @@ let pos = { x: 0, y: 0 };
 
 window.addEventListener('resize', resize);
 document.addEventListener('mousemove', draw);
+document.addEventListener('touchmove', draw);
+document.addEventListener('touchmove', alert());
+
 document.addEventListener('mousedown', setPosition);
 document.addEventListener('touchstart', setPosition);
+
 document.addEventListener('mouseenter', setPosition);
 
 // new position from mouse event
@@ -72,7 +76,6 @@ $(document).click(function(){
 $('#eraser')[0].click(function(){col = "#e2ebf0";});
 
 function draw(e) {
-  console.log(pos);
   // mouse left button must be pressed
   if (e.buttons !== 1 ^ xCursorPosition> canvas.getBoundingClientRect()["x"]+canvas.getBoundingClientRect()["width"] ^ yCursorPosition>canvas.getBoundingClientRect()["y"]+canvas.getBoundingClientRect()["height"] ^ xCursorPosition<canvas.getBoundingClientRect()["x"] ^ yCursorPosition<canvas.getBoundingClientRect()["y"])
     return;
