@@ -133,7 +133,7 @@ function setTimer(i){
 }
 
 function doSkip() {
-  currentTimeRemaining = -1
+  currentTimeRemaining = 1
 }
 
 function endTime(){
