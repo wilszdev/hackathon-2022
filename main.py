@@ -27,7 +27,7 @@ prompt_options = (
         'description': 'apple'
     },
     {
-        'prompt': 'among_us',
+        'prompt': 'amongUs',
         'description': 'among us'
     },
     {
@@ -122,7 +122,11 @@ def make_submission_for_prompt(prompt_name: str):
         'categories': categories
     }
 
-    desc = prompt_name.replace('_', ' ')
+    desc = ''
+    for p in prompt_options:
+        if p['prompt'] == prompt_name:
+            desc = p['description']
+            break
 
     recent_submissions.append({
         'description': desc,

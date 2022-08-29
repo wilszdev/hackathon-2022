@@ -1,19 +1,14 @@
 # Skribbl.AI
 
-**[Skribbl.AI](https://gothic-welder-360715.ts.r.appspot.com) is inspired by popular online game [skribbl.io](https://skribbl.io), but with a twist**
-## Made during the *UQCS Hackathon*
-# Concept:
-Draw based on our prompts, and our AI will give you a score. Test your drawing skills against our AI in a fun web-based game!
+Our [skribbl.io](https://skribbl.io)-inspired project built for the UQCS Hackathon 2022, awarded Best Newcomers.
 
-Made with:
-* Flask
-* Vertex AI (via Tensorflow and Python 3.9)
+We trained an AI to recognise drawings and give them a score. [Put your doodling skills to the test](https://gothic-welder-360715.ts.r.appspot.com) in our fun web-based game!
 
-# How does it work?
-You'll be prompted to draw something that our AI has analysed. Skribbl.AI will then save your drawing on the canvas, sending it to be analysed by our custom model trained via Vertex AI, which will then output a score rating how accurate your drawing is to the prompt.
+## How does it work?
+You'll be prompted to draw something. Once the timer finishes (or if you click 'skip') we send your drawing to our AI, which will judge the image against the prompt and produce a confidence value that we use to calculate your score.
 
-# Usage
-1. Clone this repo `git clone https://github.com/wilszdev/skribbl.ai.git`
-2. Install dependencies `pip install -t lib -r requirements.txt`
-3. `gcloud app deploy`
-4. `gcloud app browse`
+## Technologies
+
+* Frontend: mostly vanilla Javascript, bit of jQuery in there
+* Backend: Flask
+* Hosting: Google Cloud (App Engine and Vertex AI)
