@@ -82,11 +82,7 @@ def create_round_get_prompt():
 
 def conf_to_score(confidence: float) -> int:
     assert 0 <= confidence <= 1, "confidence domain"
-
-    if 0 <= confidence < 0.5:
-        return int(confidence*10)
-    else:
-        return int(exp(confidence * 10)/230) + 5
+    return int(101 / (100 * exp(-9.2 * confidence) + 1))
 
 
 recent_submissions = deque()
