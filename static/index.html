@@ -30,9 +30,9 @@
             <div class="main">
                 <div class="mainLeft">
                     <div class="tools">
-                        <div class="tool" id="pencil" onclick="pencil()"><em class="fa fa-solid fa-pencil fa-lg" id="pen"></em></div>
-                        <div class="tool" id="eraser" onclick="eraser()"><em class="fa fa-solid fa-eraser fa-lg" id="per"></em></div>
-                        <div class="tool" id="reset" onclick="clearCanvas()"><em class="fa fa-solid fa-rotate-right fa-lg"></em></div>
+                        <div class="tool" id="pencil"><em onclick="activatePencil()" class="fa fa-solid fa-pencil fa-lg" id="pen"></em></div>
+                        <div class="tool" id="eraser"><em onclick="activateEraser()" class="fa fa-solid fa-eraser fa-lg" id="per"></em></div>
+                        <div class="tool" id="reset" ><em onclick="clearCanvas()"    class="fa fa-solid fa-rotate-right fa-lg"></em></div>
                         <div class="tool" id="penSize">
                             <label for="penSize">Pen Size:</label>
                             <select name="pensize" id="sizes" onchange="penSizeChange()">

@@ -13,9 +13,9 @@ $(document).ready(function() {
   $('#canvasDiv').hide();
   $('#endModal').hide();
   $('#timer').hide();
-  
+
   resize();
-  pencil();
+  activatePencil();
 });
 
 const timeLimit = 60;
@@ -23,6 +23,7 @@ const timeLimit = 60;
 // get canvas 2D context and set him correct size
 let canvas = document.getElementById('canvasView');
 let ctx = canvas.getContext('2d');
+const backgroundColour = "#e2ebf0"
 resize();
 
 let round = 1;
@@ -35,9 +36,7 @@ let pos = { x: 0, y: 0 };
 
 window.addEventListener('resize', resize);
 document.addEventListener('mousemove', draw);
-
 document.addEventListener('mousedown', setPosition);
-
 document.addEventListener('mouseenter', setPosition);
 
 // new position from mouse event
@@ -61,34 +60,24 @@ let lineWid = 3;
 
 let erase = false;
 
-$(document).click(function(){
-
-  if(!erase){
-    col = $("#colorpicker")[0].value;
-  }
-  else{
-    col = "rgb(225, 234, 239)";
-  }
-});
-
-$('#eraser')[0].click(function(){col = "#e2ebf0";});
-
 function draw(e) {
   // mouse left button must be pressed
   if (e.buttons !== 1)
     return;
-  if(xCursorPosition> canvas.getBoundingClientRect()["x"]+canvas.getBoundingClientRect()["width"] ^ yCursorPosition>canvas.getBoundingClientRect()["y"]+canvas.getBoundingClientRect()["height"] ^ xCursorPosition<canvas.getBoundingClientRect()["x"] ^ yCursorPosition<canvas.getBoundingClientRect()["y"]){
-    ctx.clearPath();
-    return;
-  } 
-  // pos.x 
-  $('#pencil')[0].click(function(){col = $("#colorpicker")[0].value;});
+
+  if (erase) {
+    col = backgroundColour;
+  } else {
+    col = $("#colorpicker")[0].value;
+  }
+
+  // pos.x
   ctx.beginPath(); // begin
 
   ctx.lineWidth = lineWid;
   ctx.lineCap = 'round';
   ctx.strokeStyle = col;
-  
+
   ctx.moveTo(pos.x, pos.y); // from
   setPosition(e);
   ctx.lineTo(pos.x, pos.y); // to
@@ -97,7 +86,8 @@ function draw(e) {
 }
 
 function clearCanvas(){
-  ctx.clearRect(0, 0, $('#canvasView')[0].width, $('#canvasView')[0].height);
+  ctx.fillStyle = backgroundColour
+  ctx.fillRect(0, 0, $('#canvasView')[0].width, $('#canvasView')[0].height);
 }
 
 function startRound() {
@@ -192,16 +182,14 @@ function submit_image(callback) {
   }, "image/png");
 }
 
-function eraser(){
+function activateEraser(){
   erase = true;
-  col = "#e2ebf0";
   $('#pen').css("border", "0px dashed white");
   $('#per').css("border", "2px dashed white");
 }
 
-function pencil(){
+function activatePencil(){
   erase = false;
-  col = $("#colorpicker")[0].value;
   $('#per').css("border", "0px dashed white");
   $('#pen').css("border", "2px dashed white");
 }
