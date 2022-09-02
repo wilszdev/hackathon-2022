@@ -35,10 +35,10 @@ $('#round').text("ROUND "+round);
 // last known position
 let pos = { x: 0, y: 0 };
 
-window.addEventListener('resize', resize);
-document.addEventListener('mousemove', draw);
-document.addEventListener('mousedown', setPosition);
-document.addEventListener('mouseenter', setPosition);
+$(window).resize(resize);
+$(document).mousemove(draw);
+$(document).mousedown(setPosition);
+$(document).mouseenter(setPosition);
 
 // new position from mouse event
 function setPosition(e) {
@@ -92,9 +92,9 @@ function clearCanvas(){
 }
 
 function startRound() {
-  hideStart();
-  showCanvas();
   $("#skipButton").show();
+  $('#startModal').hide();
+  $('#canvasDiv').show();
   resize();
 
   api_get_prompt((p) => {
@@ -126,9 +126,9 @@ function doSkip() {
 }
 
 function endTime(){
-  hideCanvas();
-  showEnd();
   $("#skipButton").hide();
+  $('#canvasDiv').hide();
+  $('#endModal').show();
   //send image
   $('#aiThought').text("");
   $('#congrats').text("Processing...");
@@ -173,7 +173,7 @@ function endTime(){
 function nextRound(){
   round++;
   $('#round').text("ROUND "+round);
-  hideEnd();
+  $('#endModal').hide();
   startRound();
 }
 
@@ -200,26 +200,6 @@ function activatePencil(){
 function penSizeChange(){
   lineWid = $('#sizes').val();
 }
-
-function showStart(){
-  $('#startModal').show();
-}
-function hideStart(){
-  $('#startModal').hide();
-}
-function showCanvas(){
-  $('#canvasDiv').show();
-}
-function hideCanvas(){
-  $('#canvasDiv').hide();
-}
-function showEnd(){
-  $('#endModal').show();
-}
-function hideEnd(){
-  $('#endModal').hide();
-}
-
 
 function startup() {
   canvas.addEventListener('touchstart', handleStart);
