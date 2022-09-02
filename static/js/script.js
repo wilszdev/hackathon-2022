@@ -1,6 +1,5 @@
 let currentPrompt;
 let currentPromptId;
-let currentTimeRemaining;
 
 var xCursorPosition = -1;
 var yCursorPosition = -1;
@@ -19,6 +18,8 @@ $(document).ready(function() {
 });
 
 const timeLimit = 60;
+let timerInterval = null;
+let currentTimeRemaining;
 
 // get canvas 2D context and set him correct size
 let canvas = document.getElementById('canvasView');
@@ -93,6 +94,7 @@ function clearCanvas(){
 function startRound() {
   hideStart();
   showCanvas();
+  $("#skipButton").show();
   resize();
 
   api_get_prompt((p) => {
@@ -126,12 +128,13 @@ function doSkip() {
 function endTime(){
   hideCanvas();
   showEnd();
+  $("#skipButton").hide();
   //send image
   $('#aiThought').text("");
   $('#congrats').text("Processing...");
   $('#numberCurrentPoints').text("");
   $('#endModalButton').hide();
-  submit_image((score, top_categories) => {    
+  submit_image((score, top_categories) => {
     totalScore += score
     let thought = "The AI had no clue what on earth you drew..."
     let congrats = "Do better!"
@@ -150,7 +153,7 @@ function endTime(){
         congrats = "Nice Work!";
       } else {
         congrats = "Get good.";
-        
+
         if (top_categories.length == 1) {
           thought = `Oops! The AI thought your drawing was ${cat_art[0]}.`;
         } else {
@@ -289,4 +292,3 @@ function ongoingTouchIndexById(idToFind) {
   }
   return -1;    // not found
 }
-
