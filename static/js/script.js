@@ -188,7 +188,7 @@ function nextRound(){
   round++;
   $('#round').text("ROUND "+round);
   hideEnd();
-  showStart();
+  startRound();
 }
 
 function submit_image(callback) {
