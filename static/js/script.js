@@ -7,7 +7,6 @@ var yCursorPosition = -1;
 function getCursorPosition(event) {
   xCursorPosition = event.clientX;
   yCursorPosition = event.clientY;
-  console.log("xCursorPosition "+xCursorPosition+" yCursorPosition "+yCursorPosition);
 }
 
 $(document).ready(function() {
