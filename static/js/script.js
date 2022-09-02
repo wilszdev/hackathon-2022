@@ -117,23 +117,14 @@ function startRound() {
 
   $("#timeRemaining").text(timeLimit + " seconds left");
   $('#timer').show();
-  let timerInterval = setInterval(() => {
-    setTimer(currentTimeRemaining);
+  timerInterval = setInterval(() => {
+    $("#timeRemaining").text(`${currentTimeRemaining} second${currentTimeRemaining == 1 ? "" : "s"} left`);
     currentTimeRemaining--;
     if(currentTimeRemaining < 0){
       clearInterval(timerInterval);
       endTime();
     }
   }, 1000);
-} 
-
-function setTimer(i){
-  if(i == 1){
-    $("#timeRemaining").text(i + " second left");
-  }
-  else{
-    $("#timeRemaining").text(i + " seconds left");
-  }
 }
 
 function doSkip() {
