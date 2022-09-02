@@ -128,7 +128,9 @@ function startRound() {
 }
 
 function doSkip() {
-  currentTimeRemaining = 1
+  currentTimeRemaining = 0
+  if (timerInterval != null) clearInterval(timerInterval);
+  endTime()
 }
 
 function endTime(){
