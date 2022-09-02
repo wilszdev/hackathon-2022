@@ -18,7 +18,7 @@ $(document).ready(function() {
   pencil();
 });
 
-const timeLimit = 30;
+const timeLimit = 60;
 
 // get canvas 2D context and set him correct size
 let canvas = document.getElementById('canvasView');
