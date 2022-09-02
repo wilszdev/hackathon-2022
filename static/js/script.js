@@ -204,23 +204,29 @@ function penSizeChange(){
 function startup() {
   canvas.addEventListener('touchstart', handleStart);
   canvas.addEventListener('touchmove', handleMove);
+  canvas.addEventListener('touchend', handleEnd);
 }
 
 document.addEventListener("DOMContentLoaded", startup);
 
 const ongoingTouches = [];
 
+function handleEnd(evt) {
+  evt.preventDefault();
+  ongoingTouches.splice(0, ongoingTouches.length);
+}
+
 function handleStart(evt) {
   evt.preventDefault();
-  console.log('touchstart.');
   const touches = evt.changedTouches;
 
   for (let i = 0; i < touches.length; i++) {
     ongoingTouches.push(copyTouch(touches[i]));
-    const color = colorForTouch(touches[i]);
     ctx.beginPath();
-    ctx.arc(touches[i].pageX, touches[i].pageY, 4, 0, 2 * Math.PI, false);  // a circle at the start
-    ctx.fillStyle = color;
+    x = touches[i].pageX-$('#canvasView').offset().left;
+    y = touches[i].pageY-$('#canvasView').offset().top;
+    ctx.arc(x, y, lineWid/2, 0, 2 * Math.PI, false);  // a circle at the start
+    ctx.fillStyle = col;
     ctx.fill();
   }
 }
@@ -245,17 +251,6 @@ function handleMove(evt) {
       console.log(log('can\'t figure out which touch to continue'));
     }
   }
-}
-
-function colorForTouch(touch) {
-  let r = touch.identifier % 16;
-  let g = Math.floor(touch.identifier / 3) % 16;
-  let b = Math.floor(touch.identifier / 7) % 16;
-  r = r.toString(16); // make it a hex digit
-  g = g.toString(16); // make it a hex digit
-  b = b.toString(16); // make it a hex digit
-  const color = `#${r}${g}${b}`;
-  return color;
 }
 
 function copyTouch({ identifier, pageX, pageY }) {
