@@ -49,10 +49,6 @@ prompt_options = (
     {
         'prompt': 'house',
         'description': 'house'
-    },
-    {
-        'prompt': 'car',
-        'description': 'car'
     }
 )
 
